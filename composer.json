@@ -1,0 +1,11 @@
+{
+    "name": "forkwars",
+    "description": "game",
+    "license": "None",
+    "require": {
+        "symfony/finder": "*"
+    },
+    "autoload": {
+        "psr-0": {"Forkwars\\": "src/"}
+    }
+}
