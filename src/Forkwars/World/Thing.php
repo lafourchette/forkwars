@@ -2,20 +2,24 @@
 
 namespace Forkwars\World;
 
+use Forkwars\Position;
+
 /**
  * Most basic type of thing in the game.
  */
 class Thing
 {
-    public function getSprite()
+    private $world;
+
+    public function setWorld($world)
     {
-        throw new \Exception('no sprite');
+        $this->world = $world;
     }
 
-    public function getPosition()
+    private $position;
+
+    public function setWorldPosition(Position $position)
     {
-
+        $this->position = $position;
     }
-
-
 }

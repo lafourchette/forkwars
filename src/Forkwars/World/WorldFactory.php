@@ -2,11 +2,13 @@
 
 namespace Forkwars\World;
 
-use Forkwars\World\Terrain\TerrainFactory;
+use Forkwars\Position;
+use Forkwars\World\TerrainFactory;
 use Forkwars\World\World;
 
 /**
- * Builds a World with a text representation
+ * Builds a World
+ *
  * @package Forkwars\World
  */
 class WorldFactory
@@ -16,17 +18,16 @@ class WorldFactory
     public function __construct()
     {
         $this->terrainFactory = new TerrainFactory();
-        $this->terrainFactory->loadAvailableTerrains();
     }
 
-    public function make($mapFile)
+    public function make($string)
     {
-        $raw = file_get_contents($mapFile);
-        $lines = explode(PHP_EOL, $raw);
+        //$raw = file_get_contents($mapFile);
+        $lines = explode(PHP_EOL, $string);
 
         $name = $lines[0];
         if(! preg_match('/(\d+)x(\d+)/', $lines[1], $matches)){
-            throw new \Excepiton('Cannot find size info in ' . $mapFile);
+            throw new \Exception('Cannot find size info in map reprensation');
         }
 
         $width = $matches[1];
@@ -37,8 +38,8 @@ class WorldFactory
         for ($y = 0; $y < $height; $y++) {
             $line = $lines[2 + $y];
             for($x = 0; $x < $width; $x++){
-                $terrain = $this->terrainFactory->make($line[$x]);
-                $world->setTerrain($x, $y, $terrain);
+                $terrain = $this->terrainFactory->make($line[$x], $world);
+                $world->setTerrain(new Position($x, $y), $terrain);
             }
         }
 

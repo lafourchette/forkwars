@@ -2,14 +2,14 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Forkwars\World\World;
 use Forkwars\General\DumbBot;
 use Forkwars\General\NaiveBot;
 use Forkwars\World\WorldFactory;
 
 // Create a world
 $worldFactory = new WorldFactory();
-$world = $worldFactory->make(__DIR__ . '/data/basic.map');
+$mapString = file_get_contents(__DIR__ . '/data/basic.map');
+$world = $worldFactory->make($mapString);
 
 var_dump($world); die;
 return;

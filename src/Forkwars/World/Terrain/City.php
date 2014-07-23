@@ -2,5 +2,5 @@
 
 namespace Forkwars\World\Terrain;
 
-class Water extends Terrain
+class City extends Terrain
 {}

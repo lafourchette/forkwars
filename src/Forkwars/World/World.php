@@ -3,6 +3,7 @@
 namespace Forkwars\World;
 
 use Forkwars\World\Terrain\Terrain;
+use Forkwars\Position;
 
 /**
  * Holds the world representation
@@ -26,14 +27,26 @@ class World
         $this->height=$height;
     }
 
-    function setTerrain($x, $y, Terrain $terrain)
+    function setTerrain(Position $position, Terrain $terrain)
     {
-        $this->terrainMap[$this->pos($x, $y)] = $terrain;
+        $this->terrainMap[$this->pos($position)] = $terrain;
+        $terrain->setWorldPosition($position);
         return $this;
     }
 
-    private function pos($x, $y)
+    function getTerrain($position)
     {
+        return $this->terrainMap[$this->pos($position)];
+    }
+
+    private function pos($x, $y = null)
+    {
+        if($x instanceof Position){
+            $y = $x->y;
+            $x = $x->x;
+        } else if(is_null($y)) {
+            throw new \Exception('Please set y');
+        }
         return $x + $this->width * $y;
     }
 }
