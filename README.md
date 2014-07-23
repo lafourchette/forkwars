@@ -1,28 +1,21 @@
 # Forkwars
 
-Forkwars is a turn by turn strategy game based on the Nintendo (tm) success Advance Wars. The main goal is to provide a wa of testing AI algorithms by making them compet.
+Forkwars is a turn by turn strategy game based on the Intelligence System success Advance Wars.
 
-A game server is run by LaFourchette team, aichallenge.com manner, and anyone can compete by using an API.
+The game provide an environment where one can develop and test AI code, against self or other
+competitors.
 
-# Requirements
+## Requirements
 GNU make
 
-# Installing
+## Installing
 
 ```bash
 make install
 ```
 
-# Competing against others
+You can serve the root folder and have a look at the viewer.php file.
 
-You AI level can be tested by connecting to the server and playing 10 matches (takes usually a few minutes). It uses github credentials to authentify you. Make your way in the hall of fame at http://forkgame.lafourchette.com
+## Contributing
 
-```bash
-make fight
-```
-
-If you want to implement it in another language, feel free to read the source code.
-
-# Contributing
-
-Good algorithms can be proposed to LaFourchette. They'll be integrated.
+Fill or solve [issues](/lafourchette/forkwars/issues).

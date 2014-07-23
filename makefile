@@ -1,11 +1,9 @@
 PHP=`which php`
 
-.DEFAULT: build
-.PHONY: clean cronjob
+.DEFAULT: install
+.PHONY: clean
 
 install: | vendor
-	echo "please add test"
-
 
 check: PHP-exists
 
