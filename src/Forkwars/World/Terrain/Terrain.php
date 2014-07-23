@@ -18,4 +18,9 @@ class Terrain extends Thing
     {
         $this->code = $code;
     }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
 }

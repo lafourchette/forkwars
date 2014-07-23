@@ -17,10 +17,10 @@ class TerrainFactory
         $t = null;
         switch($code)
         {
-            case '_':
+            case 'x':
                 $t = new Land();
                 break;
-            case '.':
+            case 'i':
                 $t = new Water();
                 break;
             case 'R':

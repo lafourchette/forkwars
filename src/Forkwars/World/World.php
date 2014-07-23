@@ -14,9 +14,9 @@ class World
 {
     private $name;
 
-    private $width;
+    public $width;
 
-    private $height;
+    public $height;
 
     private $terrainMap;
 
