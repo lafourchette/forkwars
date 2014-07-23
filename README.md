@@ -18,4 +18,4 @@ You can serve the root folder and have a look at the viewer.php file.
 
 ## Contributing
 
-Fill or solve [issues](/lafourchette/forkwars/issues).
+Fill or solve [issues](https://github.com/lafourchette/forkwars/issues).
