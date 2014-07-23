@@ -2,6 +2,8 @@
 
 Forkwars is a turn by turn strategy game based on the Intelligence System success Advance Wars.
 
+Read more about it on http://en.wikipedia.org/wiki/Advance_Wars
+
 The game provide an environment where one can develop and test AI code, against self or other
 competitors.
 
