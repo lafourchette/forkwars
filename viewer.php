@@ -94,8 +94,8 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 
 		var terrain = new PIXI.Sprite(texturesTerrains[iconeTerrain]);
 		
-		terrain.anchor.x = 0.5;
-		terrain.anchor.y = 0.5;
+		terrain.anchor.x = 0.0;
+		terrain.anchor.y = 0.0;
 		
 		//on prend la taille de l'image png sans agrandissement.
 		terrain.scale.x = terrain.scale.y = 2;
