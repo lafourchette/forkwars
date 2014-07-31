@@ -3,8 +3,6 @@
 namespace Forkwars\World;
 
 use Forkwars\Position;
-use Forkwars\World\TerrainFactory;
-use Forkwars\World\World;
 
 /**
  * Builds a World
@@ -31,7 +29,7 @@ class WorldFactory
         $lines = explode(PHP_EOL, $string);
 
         $name = $lines[0];
-        if(! preg_match('/(\d+)x(\d+)/', $lines[1], $matches)){
+        if (! preg_match('/(\d+)x(\d+)/', $lines[1], $matches)) {
             throw new \Exception('Cannot find size info in map reprensation');
         }
 
@@ -43,7 +41,7 @@ class WorldFactory
         for ($y = 0; $y < $height; $y++) {
 
             $line = $lines[2 + $y];
-            for($x = 0; $x < $width; $x++){
+            for ($x = 0; $x < $width; $x++) {
                 $terrain = $this->terrainFactory->make($line[$x], $world);
                 $world->setTerrain(new Position($x, $y), $terrain);
             }

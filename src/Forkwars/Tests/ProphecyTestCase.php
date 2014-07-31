@@ -27,7 +27,7 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->__prophet = new Prophet;
+        $this->__prophet = new Prophet();
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
      */
     public function __set($name, $value)
     {
-        if(! $this->isValidMockVarName($name)){
+        if (! $this->isValidMockVarName($name)) {
             throw new \Exception('Unknown variable ' . $name);
         }
 
@@ -69,7 +69,7 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
      */
     public function __get($name)
     {
-        if(! $this->isValidMockVarName($name)){
+        if (! $this->isValidMockVarName($name)) {
             throw new \Exception('Unknown variable ' . $name);
         }
 
@@ -95,9 +95,10 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
 
     public function prophesize($className)
     {
-        if(! class_exists($className) && ! interface_exists($className)){
+        if (! class_exists($className) && ! interface_exists($className)) {
             throw new \Exception("$className class/interface does not exists");
         }
+
         return $this->__prophet->prophesize($className);
     }
 
@@ -115,9 +116,9 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
 
         // Loop through all class' constructors parameters in order to mock them
         $instanceParameters = array();
-        foreach($constructorParameters as $cp) {
+        foreach ($constructorParameters as $cp) {
             // Optionnal parameters are nulled
-            if($cp->isOptional()){
+            if ($cp->isOptional()) {
                 array_push($instanceParameters, 'null');
                 continue;
             }
@@ -125,19 +126,18 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
             $name = $cp->getName();
             $mockName = 'mock' . ucfirst($name);
             $pClass = $cp->getClass();
-            if($pClass == null){
-                if(! isset($hints[$name])){
+            if ($pClass == null) {
+                if (! isset($hints[$name])) {
                     throw new \Exception('I dont know how to build this instance, cause typehinting for parameter '.$name.' is missing. Use $hints parameter.');
                 }
                 $pClass = $hints[$name];
-                if(! class_exists($pClass) && ! interface_exists($pClass)){
+                if (! class_exists($pClass) && ! interface_exists($pClass)) {
                     throw new \Exception($pClass . ' cannot be found. Please review the $hints.');
                 }
-            }
-            else{
+            } else {
                 $pClass = $pClass->getName();
                 // add a slash for resolution
-                if($pClass[0] !== '\\'){
+                if ($pClass[0] !== '\\') {
                     $pClass = '\\' . $pClass;
                 }
             }

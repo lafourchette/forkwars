@@ -20,33 +20,53 @@ class World
 
     private $terrainMap;
 
-    function __construct($name, $width, $height)
+    public function __construct($name, $width, $height)
     {
         $this->name = $name;
         $this->width= $width;
         $this->height=$height;
     }
 
-    function setTerrain(Position $position, Terrain $terrain)
+    public function setTerrain(Position $position, Terrain $terrain)
     {
         $this->terrainMap[$this->pos($position)] = $terrain;
         $terrain->setWorldPosition($position);
+
         return $this;
     }
 
-    function getTerrain($position)
+    /**
+     * Will fill the entire World with $terrain clone instance.
+     *
+     * @param  Terrain $terrain
+     * @return World   Fluent interface
+     */
+    public function fillWith(Terrain $terrain)
+    {
+        for ($x = 0; $x < $this->width; $x++) {
+            for ($y = 0; $y < $this->height; $y++) {
+                $pos = new Position($x, $y);
+                $this->setTerrain($pos, clone $terrain);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTerrain($position)
     {
         return $this->terrainMap[$this->pos($position)];
     }
 
     private function pos($x, $y = null)
     {
-        if($x instanceof Position){
+        if ($x instanceof Position) {
             $y = $x->y;
             $x = $x->x;
-        } else if(is_null($y)) {
+        } elseif (is_null($y)) {
             throw new \Exception('Please set y');
         }
+
         return $x + $this->width * $y;
     }
 }

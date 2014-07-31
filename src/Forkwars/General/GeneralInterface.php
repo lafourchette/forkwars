@@ -15,5 +15,5 @@ namespace Forkwars\General;
 
 interface GeneralInterface
 {
-    function giveOrders(World $world);
+    public function giveOrders(World $world);
 }

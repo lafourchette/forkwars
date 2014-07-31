@@ -3,7 +3,6 @@
 namespace Forkwars\Tests\World;
 
 use Forkwars\Position;
-use Prophecy\Argument;
 use Forkwars\World\WorldFactory;
 use Forkwars\Tests\ProphecyTestCase;
 
@@ -56,4 +55,4 @@ yeah
 @
 EOF;
     }
-} 
+}

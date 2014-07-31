@@ -6,7 +6,7 @@ class Position
 {
     public $x, $y;
 
-    function __construct($x, $y)
+    public function __construct($x, $y)
     {
         $this->x = $x;
         $this->y = $y;

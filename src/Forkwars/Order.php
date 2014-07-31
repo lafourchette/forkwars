@@ -7,5 +7,5 @@ namespace Forkwars;
  */
 class Order
 {
-	
+
 }

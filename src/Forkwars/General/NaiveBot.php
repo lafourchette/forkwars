@@ -10,12 +10,12 @@ namespace Forkwars\General;
  */
 class NaiveBot implements GeneralInterface
 {
-    function giveOrders(World $world)
+    public function giveOrders(World $world)
     {
         $infantry = $world->find('Infantry', 0);
         $opHQ = $world->find('Headquarter', 1);
-        if($infantry){
-            if($infantry->isAt($opHQ)){
+        if ($infantry) {
+            if ($infantry->isAt($opHQ)) {
                 $order = $infantry->capture();
             } else {
                 $order = $infantry->moveToward($opHQ);

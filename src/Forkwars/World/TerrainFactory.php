@@ -2,7 +2,6 @@
 
 namespace Forkwars\World;
 
-
 use Forkwars\World\Terrain\City;
 use Forkwars\World\Terrain\Factory;
 use Forkwars\World\Terrain\Headquarter;
@@ -15,8 +14,7 @@ class TerrainFactory
     public function make($code, World $world)
     {
         $t = null;
-        switch($code)
-        {
+        switch ($code) {
             case 'x':
                 $t = new Land();
                 break;
@@ -43,6 +41,7 @@ class TerrainFactory
 
         $t->setCode($code);
         $t->setWorld($world);
+
         return $t;
     }
 

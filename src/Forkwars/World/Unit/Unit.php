@@ -2,21 +2,21 @@
 
 class Unit extends Thing
 {
-	public $health;
+    public $health;
 
-	public $ammo;
+    public $ammo;
 
-	public $moveCount;
+    public $moveCount;
 
-	public $viewCount;
+    public $viewCount;
 
-	public $offensePower;
+    public $offensePower;
 
-	public $defensePower;
+    public $defensePower;
 
-	public $isMarine;
+    public $isMarine;
 
-	public $isGround;
+    public $isGround;
 
-	public $isAir;
+    public $isAir;
 }

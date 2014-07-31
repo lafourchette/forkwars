@@ -9,10 +9,10 @@ namespace Forkwars\General;
  */
 class DumbBot implements GeneralInterface
 {
-    function giveOrders(World $world)
+    public function giveOrders(World $world)
     {
         $infantry = $world->find('Infantry', 0);
-        if($infantry){
+        if ($infantry) {
             $order = $infantry->move(rand(0, 3));
         } else {
             $order = $world->find('Factory', 0)->spawn('Infantry');
