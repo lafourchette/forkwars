@@ -18,6 +18,14 @@ make install
 
 You can serve the root folder and have a look at the viewer.php file.
 
+## Testing
+
+Make sure you have phpunit installed somewhere in your PATH. Just run phpunit in the root folder.
+
+```bash
+phpunit
+```
+
 ## Contributing
 
 Fill or solve [issues](https://github.com/lafourchette/forkwars/issues).
