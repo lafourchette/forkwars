@@ -1,5 +1,9 @@
 <?php
 
+namespace Forkwars\World\Unit;
+
+use Forkwars\World\Thing;
+
 class Unit extends Thing
 {
     public $health;

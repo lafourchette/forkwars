@@ -2,6 +2,7 @@
 
 namespace Forkwars\World;
 
+use Forkwars\World\Unit\Unit;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\Position;
 
@@ -20,6 +21,8 @@ class World
 
     private $terrainMap;
 
+    private $unitList = array();
+
     public function __construct($name, $width, $height)
     {
         $this->name = $name;
@@ -33,6 +36,23 @@ class World
         $terrain->setWorldPosition($position);
 
         return $this;
+    }
+
+    public function spawnUnit(Position $position, Unit $unit)
+    {
+        $this->unitList[] = $unit;
+        $unit->setWorldPosition($position);
+    }
+
+    public function getUnitAt(Position $position)
+    {
+        foreach($this->unitList as $unit)
+        {
+            if ($unit->getWorldPosition()->equals($position)){
+                return $unit;
+            }
+        }
+        return false;
     }
 
     /**
