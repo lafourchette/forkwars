@@ -35,4 +35,4 @@ class ReachablePositionsAlgorithmTest extends ProphecyTestCase
         $positions = $this->dut->compute($this->unit);
         var_dump($positions);
     }
-} 
+}

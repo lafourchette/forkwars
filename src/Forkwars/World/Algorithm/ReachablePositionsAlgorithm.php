@@ -43,7 +43,7 @@ class ReachablePositionsAlgorithm
         }
         // Get the current cost movement left.
         $currentCost = $this->cost[$pos->__toString()];
-        if($currentCost <= 0){
+        if ($currentCost <= 0) {
             return;
         }
 
@@ -53,7 +53,7 @@ class ReachablePositionsAlgorithm
             $terrain = $this->world->getTerrain($p);
             $previousCost = isset($this->cost[$p->__toString()]) ? $this->cost[$p->__toString()] : 0;
             $computedCost = $currentCost - $terrain->footCost;
-            if($computedCost > $previousCost){
+            if ($computedCost > $previousCost) {
                 $this->cost[$p->__toString()] = $computedCost;
             }
         }
@@ -66,4 +66,4 @@ class ReachablePositionsAlgorithm
             $this->_recursive($p);
         }
     }
-} 
+}
