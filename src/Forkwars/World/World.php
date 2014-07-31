@@ -42,6 +42,21 @@ class World
     {
         $this->unitList[] = $unit;
         $unit->setWorldPosition($position);
+        $unit->setWorld($this);
+    }
+
+    public function getNeighboringPositions(Position $position)
+    {
+        $n = clone $position; $n->y--;
+        $s = clone $position; $s->y++;
+        $w = clone $position; $w->x--;
+        $e = clone $position; $e->x++;
+
+        $world = $this;
+        return array_filter(array($n, $s, $w, $e), function(Position $p) use ($world){
+            return ! ( $p->y < 0 || $world->height < $p->y ||
+                $p->x < 0 || $world->width < $p->x );
+        });
     }
 
     public function getUnitAt(Position $position)

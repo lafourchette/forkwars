@@ -16,6 +16,11 @@ class Thing
         $this->world = $world;
     }
 
+    public function getWorld()
+    {
+        return $this->world;
+    }
+
     private $position;
 
     public function setWorldPosition(Position $position)

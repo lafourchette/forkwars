@@ -16,4 +16,9 @@ class Position
     {
         return ($this->x == $p->x) && ($this->y == $p->y);
     }
+
+    public function __toString()
+    {
+        return $this->x.'-'.$this->y;
+    }
 }

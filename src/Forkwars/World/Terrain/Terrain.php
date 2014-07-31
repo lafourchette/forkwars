@@ -8,6 +8,12 @@ class Terrain extends Thing
 {
     public $shelterPower;
 
+    public $footCost  = null;
+
+    public $tyreCost  = null;
+
+    public $trackCost = null;
+
     /**
      * @var string $code Terrain code, for string representation
      */
