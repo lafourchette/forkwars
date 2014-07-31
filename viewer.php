@@ -70,17 +70,32 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
         On pourrais parcourir directement la grille basic.map mais il faudrait réencoder la logique en JS (1er ligne = nom, 2eme dimensions, ligne suivante etc...)
 
     */
-    
-<?php for($y = 0; $y < $world->height; $y++) :?>
 
-<?php for($x = 0; $x < $world->width; $x++) :?>
+	function onAssetsLoaded() {    
+		<?php for($y = 0; $y < $world->height; $y++) :?>
+		
+		<?php for($x = 0; $x < $world->width; $x++) :?>
+		
+		createTerrain(<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>, <?php echo $x; ?>, <?php echo $y; ?>)
+		
+		<?php endfor; ?>
+		
+		<?php endfor; ?>
+	}
 
-    createTerrain(<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>, <?php echo $x; ?>, <?php echo $y; ?>)
-
-<?php endfor; ?>
-
-<?php endfor; ?>
-
+// create an array of assets to load
+	var assetsToLoader = [ "sprites.json"];
+	
+	// create a new loader
+	loader = new PIXI.AssetLoader(assetsToLoader);
+	
+	// use callback
+	loader.onComplete = onAssetsLoaded
+	
+	//begin load
+	loader.load();
+	
+	
 
 	function createTerrain(code, x, y)
 	{
@@ -88,8 +103,8 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 
         if(!texturesTerrains[iconeTerrain])
         {
-    		var texture = PIXI.Texture.fromImage(iconeTerrain);
-    		texturesTerrains[iconeTerrain] = texture;
+            var texture = PIXI.Texture.fromFrame(iconeTerrain);
+            texturesTerrains[iconeTerrain] = texture;
         }
 
 		var terrain = new PIXI.Sprite(texturesTerrains[iconeTerrain]);
@@ -97,7 +112,7 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 		terrain.anchor.x = 0.0;
 		terrain.anchor.y = 0.0;
 		
-		//on prend la taille de l'image png sans agrandissement.
+		//on prend la taille de l'image agrandi 2 fois car image 16*16 alors qu'on a des zones de 32*32.
 		terrain.scale.x = terrain.scale.y = 2;
 		
 		// move the sprite to its designated position
