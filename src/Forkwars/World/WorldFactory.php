@@ -20,6 +20,11 @@ class WorldFactory
         $this->terrainFactory = new TerrainFactory();
     }
 
+    public function setTerrainFactory($terrainFactory)
+    {
+        $this->terrainFactory = $terrainFactory;
+    }
+
     public function make($string)
     {
         //$raw = file_get_contents($mapFile);
@@ -36,6 +41,7 @@ class WorldFactory
         $world = new World($name, $width, $height);
 
         for ($y = 0; $y < $height; $y++) {
+
             $line = $lines[2 + $y];
             for($x = 0; $x < $width; $x++){
                 $terrain = $this->terrainFactory->make($line[$x], $world);
