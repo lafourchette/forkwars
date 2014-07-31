@@ -28,6 +28,7 @@ class InfantryTest extends ProphecyTestCase
         $this->world->spawnUnit($pos, $infantry);
 
         $this->assertSame($this->world->getUnitAt($pos), $infantry);
+
         return $this->world;
     }
 

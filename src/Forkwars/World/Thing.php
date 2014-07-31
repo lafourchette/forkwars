@@ -21,6 +21,7 @@ class Thing
     public function setWorldPosition(Position $position)
     {
         $this->position = $position;
+
         return $this;
     }
 

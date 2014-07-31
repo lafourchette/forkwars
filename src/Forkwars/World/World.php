@@ -46,12 +46,12 @@ class World
 
     public function getUnitAt(Position $position)
     {
-        foreach($this->unitList as $unit)
-        {
-            if ($unit->getWorldPosition()->equals($position)){
+        foreach ($this->unitList as $unit) {
+            if ($unit->getWorldPosition()->equals($position)) {
                 return $unit;
             }
         }
+
         return false;
     }
 

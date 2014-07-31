@@ -10,4 +10,4 @@ class Infantry extends Unit
     {
         $this->setWorldPosition($to);
     }
-} 
+}
