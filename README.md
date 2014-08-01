@@ -29,3 +29,7 @@ phpunit
 ## Contributing
 
 Fill or solve [issues](https://github.com/lafourchette/forkwars/issues).
+
+## Hall Of Fame
+
+[rodrigue67](https://github.com/rodrigue67)
