@@ -76,9 +76,9 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
     */
 
 	function onAssetsLoaded() {    
-		<?php for($y = 0; $y < $world->height; $y++) :?>
+		<?php for($y = 0; $y < $world->height ; $y++) :?>
 		
-		<?php for($x = 0; $x < $world->width; $x++) :?>
+		<?php for($x = 0; $x < $world->width ; $x++) :?>
 		
 		createTerrain('<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>)
 		
@@ -113,8 +113,8 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 
 		var terrain = new PIXI.Sprite(texturesTerrains[iconeTerrain]);
 
-		terrain.anchor.x = 0.0;
-		terrain.anchor.y = 0.0;
+		terrain.anchor.x = 1;
+		terrain.anchor.y = 1;
 		
 		//on prend la taille de l'image agrandi 2 fois car image 16*16 alors qu'on a des zones de 32*32.
 		terrain.scale.x = terrain.scale.y = 4; //2 fois pour etre en 32*32 et 2 fois pour l'agrandissement.
@@ -122,9 +122,8 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 		// move the sprite to its designated position
         //on calcule le x par rapport a la matrice de la grille en prenant en compte
         //la taille en px de la zone ainsi que l'échelle car aucun terrain ne dois se chauvaucher.
-		terrain.position.x = x*32*2;
-		terrain.position.y = y*32*2;
-		
+		terrain.position.x = x*32*2+64;
+		terrain.position.y = y*32*2+64;
 		// add it to the stage
 		stage.addChild(terrain);
 	}
