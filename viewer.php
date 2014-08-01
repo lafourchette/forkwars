@@ -44,6 +44,10 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 -->
 <script type="text/javascript" src="http://www.goodboydigital.com/pixijs/bunnymark/js/pixi.js"></script>
 
+
+</head>
+<body>
+
 <script type="text/javascript">
 
     var heightWorld = <?php echo $world->height; ?>;
@@ -76,7 +80,7 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 		
 		<?php for($x = 0; $x < $world->width; $x++) :?>
 		
-		createTerrain(<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>, <?php echo $x; ?>, <?php echo $y; ?>)
+		createTerrain('<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>)
 		
 		<?php endfor; ?>
 		
@@ -108,12 +112,12 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
         }
 
 		var terrain = new PIXI.Sprite(texturesTerrains[iconeTerrain]);
-		
+
 		terrain.anchor.x = 0.0;
 		terrain.anchor.y = 0.0;
 		
 		//on prend la taille de l'image agrandi 2 fois car image 16*16 alors qu'on a des zones de 32*32.
-		terrain.scale.x = terrain.scale.y = 2;
+		terrain.scale.x = terrain.scale.y = 4; //2 fois pour etre en 32*32 et 2 fois pour l'agrandissement.
 		
 		// move the sprite to its designated position
         //on calcule le x par rapport a la matrice de la grille en prenant en compte
@@ -135,10 +139,6 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 
 
 </script>
-
-</head>
-<body>
-
 
 </body>
 </html>
