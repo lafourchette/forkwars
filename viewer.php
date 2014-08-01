@@ -124,7 +124,16 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
         //la taille en px de la zone ainsi que l'échelle car aucun terrain ne dois se chauvaucher.
 		terrain.position.x = x*32*2+64;
 		terrain.position.y = y*32*2+64;
-		// add it to the stage
+		terrain.setInteractive(true);
+        terrain.click = terrain.clap = function(data){
+            alert(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
+        }
+        if(terrain.width > 64){
+            scale = 64/terrain.width;
+            terrain.scale.x = terrain.scale.y = 4*scale;
+        }
+
+        // add it to the stage
 		stage.addChild(terrain);
 	}
 	
