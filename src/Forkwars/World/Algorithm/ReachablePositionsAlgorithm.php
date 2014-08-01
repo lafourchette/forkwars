@@ -8,6 +8,9 @@ use Forkwars\World\World;
 
 /**
  * Compute reachable positions on a World for a given Unit.
+ *
+ * Thats a dijkstra shortest path like algorithm, we keep just
+ * the by product which holds the interesting info.
  */
 class ReachablePositionsAlgorithm
 {
@@ -15,6 +18,7 @@ class ReachablePositionsAlgorithm
     private $visited;
 
     // Cost per position. When reach 0, cannot move further.
+    // shall be spl object storage
     private $cost;
 
     private $world;
@@ -41,9 +45,9 @@ class ReachablePositionsAlgorithm
         if (in_array($pos, $this->visited)) {
             return;
         }
-        // Get the current cost movement left.
-        $currentCost = $this->cost[$pos->__toString()];
-        if ($currentCost <= 0) {
+        // Get the current movements left.
+        $moveLeft = $this->cost[$pos->__toString()];
+        if ($moveLeft <= 0) {
             return;
         }
 
@@ -51,10 +55,11 @@ class ReachablePositionsAlgorithm
         $positions = $this->world->getNeighboringPositions($pos);
         foreach ($positions as $p) {
             $terrain = $this->world->getTerrain($p);
-            $previousCost = isset($this->cost[$p->__toString()]) ? $this->cost[$p->__toString()] : 0;
-            $computedCost = $currentCost - $terrain->footCost;
-            if ($computedCost > $previousCost) {
-                $this->cost[$p->__toString()] = $computedCost;
+            $prevMoveLeft = isset($this->cost[$p->__toString()]) ? $this->cost[$p->__toString()] : 0;
+            $newMoveLeft = $moveLeft - $terrain->footCost;
+            // Keep only the greedier move left
+            if ($newMoveLeft > $prevMoveLeft) {
+                $this->cost[$p->__toString()] = $newMoveLeft;
             }
         }
 
@@ -62,8 +67,9 @@ class ReachablePositionsAlgorithm
         array_push($this->visited, $pos);
 
         // Recurse on remaining nodes.
+
         foreach ($positions as $p) {
-            $this->_recursive($p);
+           // $this->_recursive($p);
         }
     }
 }

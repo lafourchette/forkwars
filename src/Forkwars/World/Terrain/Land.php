@@ -4,7 +4,7 @@ namespace Forkwars\World\Terrain;
 
 class Land extends Terrain
 {
-    public $footCost  = 2;
+    public $footCost  = 1;
 
     public $tyreCost  = 2;
 
