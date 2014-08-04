@@ -8,6 +8,7 @@ use Forkwars\World\Terrain\Factory;
 use Forkwars\World\Terrain\Headquarter;
 use Forkwars\World\Terrain\Land;
 use Forkwars\World\Terrain\Terrain;
+use Forkwars\World\Terrain\SeizableTerrain;
 use Forkwars\World\Terrain\Water;
 
 class TerrainFactory
@@ -34,13 +35,16 @@ class TerrainFactory
                 break;
             case 'C':
             case 'c':
-            case 'i': // neutral
+            case 'j': // neutral
                 $t = new City();
             default:
                 throw new \Exception('unknown code');
                 break;
         }
 
+        if($t instanceof SeizableTerrain){
+            $t->setTeam(self::getTeamByCode($code));
+        }
         $t->setCode($code);
         $t->setWorld($world);
         return $t;
@@ -49,5 +53,15 @@ class TerrainFactory
     public function recycle(Terrain $terrain)
     {
 
+    }
+    
+    public function getTeamByCode($code){
+        $teamCode = 0;
+        if(in_array($code, array('R', 'F', 'C'))){
+            $teamCode = 1; //red Team;
+        }elseif(in_array($code, array('b', 'f', 'c'))){
+            $teamCode = 2; //blue Team;
+        }
+        return $teamCode;
     }
 }

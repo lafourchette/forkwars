@@ -2,5 +2,5 @@
 
 namespace Forkwars\World\Terrain;
 
-class Factory extends Terrain
+class Factory extends SeizableTerrain
 {}

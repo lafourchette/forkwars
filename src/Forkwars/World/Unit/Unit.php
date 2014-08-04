@@ -19,4 +19,6 @@ class Unit extends Thing
 	public $isGround;
 
 	public $isAir;
+    
+    public $team;
 }

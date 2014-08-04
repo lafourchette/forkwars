@@ -88,7 +88,7 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 	}
 
 // create an array of assets to load
-	var assetsToLoader = [ "sprites.json"];
+	var assetsToLoader = [ "sprites2.json"];
 	
 	// create a new loader
 	loader = new PIXI.AssetLoader(assetsToLoader);

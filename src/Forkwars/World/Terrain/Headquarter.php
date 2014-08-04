@@ -2,5 +2,5 @@
 
 namespace Forkwars\World\Terrain;
 
-class Headquarter extends Terrain
+class Headquarter extends SeizableTerrain
 {}

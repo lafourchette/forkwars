@@ -1,0 +1,93 @@
+{"frames": 
+    {
+        "i.png":
+        {
+            "frame": {"x":340,"y":1567,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "x.png":
+        {
+            "frame": {"x":217,"y":1567,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "b.png":
+        {
+            "frame": {"x":4,"y":1539,"w":16,"h":30},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":30},
+            "sourceSize": {"w":16,"h":30}
+        },
+        "R.png":
+        {
+            "frame": {"x":4,"y":1505,"w":16,"h":30},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":30},
+            "sourceSize": {"w":16,"h":30}
+        },
+        "F.png":
+        {
+            "frame": {"x":40,"y":1520,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "f.png":
+        {
+            "frame": {"x":40,"y":1553,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "a.png":
+        {
+            "frame": {"x":40,"y":1487,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "C.png":
+        {
+            "frame": {"x":22,"y":1515,"w":16,"h":21},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":21},
+            "sourceSize": {"w":16,"h":21}
+        },
+        "c.png":
+        {
+            "frame": {"x":22,"y":1548,"w":16,"h":21},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":21},
+            "sourceSize": {"w":16,"h":21}
+        },
+        "j.png":
+        {
+            "frame": {"x":22,"y":1482,"w":16,"h":21},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":21},
+            "sourceSize": {"w":16,"h":21}
+        }
+  
+    },
+    "meta": {
+        "app": "LaFourchetteForkwars",
+        "version": "1.0",
+        "image": "data/sprites3.png",
+        "format": "RGBA8888",
+        "size": {"w":1215,"h":1744},
+        "scale": "1"
+    }
+}
