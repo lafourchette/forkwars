@@ -37,6 +37,7 @@ class TerrainFactory
             case 'c':
             case 'j': // neutral
                 $t = new City();
+                break;
             default:
                 throw new \Exception('unknown code');
                 break;
