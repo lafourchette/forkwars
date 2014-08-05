@@ -14,12 +14,16 @@ use Forkwars\World\World;
  */
 class ReachablePositionsAlgorithm
 {
-    // Already compusted positions are stored here
+    /**
+     * @var Position[] $visited Already visited nodes, dijkstra style.
+     */
     private $visited;
 
-    // Cost per position. When reach 0, cannot move further.
-    // shall be spl object storage
-    private $cost;
+    /**
+     * Movements left per position. When reach 0, cannot move further.
+     * @var \SplObjectStorage $left
+     */
+    private $left;
 
     private $world;
 
@@ -32,12 +36,19 @@ class ReachablePositionsAlgorithm
 
         // init the algorithm
         $this->visited = array();
-        $this->cost[$current->__toString()] = $unit->moveCount;
+        $this->left = new \SplObjectStorage();
+        $this->left[$current] = $unit->moveCount;
 
         $this->_recursive($current);
 
-        // we shall have now a cost with all reachable positions.
-        var_dump($this->cost); die;
+        // Filter $left to get all positions (which are indexes in the storage)
+        $reachable = array();
+        foreach ($this->left as $position)
+        {
+            $reachable[] = $position;
+        }
+
+        return $reachable;
     }
 
     private function _recursive(Position $pos)
@@ -45,8 +56,9 @@ class ReachablePositionsAlgorithm
         if (in_array($pos, $this->visited)) {
             return;
         }
+
         // Get the current movements left.
-        $moveLeft = $this->cost[$pos->__toString()];
+        $moveLeft = $this->left[$pos];
         if ($moveLeft <= 0) {
             return;
         }
@@ -54,22 +66,24 @@ class ReachablePositionsAlgorithm
         // Compute for neighboring positions
         $positions = $this->world->getNeighboringPositions($pos);
         foreach ($positions as $p) {
+            if (in_array($p, $this->visited)) {
+                continue;
+            }
             $terrain = $this->world->getTerrain($p);
-            $prevMoveLeft = isset($this->cost[$p->__toString()]) ? $this->cost[$p->__toString()] : 0;
+            $prevMoveLeft = isset($this->left[$p]) ? $this->left[$p] : -1;
             $newMoveLeft = $moveLeft - $terrain->footCost;
             // Keep only the greedier move left
             if ($newMoveLeft > $prevMoveLeft) {
-                $this->cost[$p->__toString()] = $newMoveLeft;
+                $this->left[$p] = $newMoveLeft;
             }
         }
 
-        // Mark as visited
+        // Mark as visited.
         array_push($this->visited, $pos);
 
         // Recurse on remaining nodes.
-
         foreach ($positions as $p) {
-           // $this->_recursive($p);
+           $this->_recursive($p);
         }
     }
 }
