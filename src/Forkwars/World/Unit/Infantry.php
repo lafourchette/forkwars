@@ -6,7 +6,7 @@ use Forkwars\Position;
 
 class Infantry extends Unit
 {
-    public $moveCount = 4;
+    public $moveCount = 3;
 
     public function moveTo(Position $to)
     {
