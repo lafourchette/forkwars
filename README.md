@@ -24,6 +24,10 @@ Make sure you have phpunit installed somewhere in your PATH. Just run phpunit in
 
 ```bash
 phpunit
+
+# and...
+php -S localhost:8000
+# navigate to localhost:8000/viewer.php
 ```
 
 ## Contributing
