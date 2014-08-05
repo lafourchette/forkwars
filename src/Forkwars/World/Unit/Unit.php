@@ -20,5 +20,5 @@ class Unit extends Thing
 
 	public $isAir;
     
-    public $team;
+	public $team;
 }
