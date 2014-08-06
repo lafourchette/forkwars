@@ -30,7 +30,7 @@ class WorldFactory
 
         $name = $lines[0];
         if (! preg_match('/(\d+)x(\d+)/', $lines[1], $matches)) {
-            throw new \Exception('Cannot find size info in map reprensation');
+            throw new \Exception('Cannot find size info in map file');
         }
 
         $width = $matches[1];
