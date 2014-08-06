@@ -63,22 +63,23 @@ EOF;
 x';
 		$world = $this->dut->make($map);
 		$this->assertInstanceOf('Forkwars\\World\\World', $world);
-        $this->assertInstanceOf('Forkwars\\World\\Terrain\\Land', $world->getTerrain(new Position(0, 0)));
+        	$this->assertInstanceOf('Forkwars\\World\\Terrain\\Land', $world->getTerrain(new Position(0, 0)));
 	}
 	
 	/**
-     * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage Cannot find size info in map reprensation
-     */
+     	* @expectedException InvalidArgumentException
+	* @expectedExceptionMessage Cannot find size info in map reprensation
+     	*/
 	public function testMakeWrongWorldFormat()
 	{
-		$world = 'yeah;1x1;i'
+		$map = 'yeah;1x1;i';
+		$world = $this->dut->make($map);
 	}
 	
 	/**
-     * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage unknown code
-     */
+     	* @expectedException InvalidArgumentException
+	* @expectedExceptionMessage unknown code
+     	*/
 	public function testMakeSizeTerrainNoMatch()
 	{
 		$map = <<<EOF
@@ -91,10 +92,11 @@ EOF;
 	
 	public function testMakeEmptySizeOk()
 	{
-		$world = <<<EOF
+		$map = <<<EOF
 yeah
 0x0
 EOF;
+		$world = $this->dut->make($map);
 	}
 	
 	public function testMakeNegativeWidthOk()
@@ -106,15 +108,16 @@ b
 EOF;
 		$world = $this->dut->make($map);
 		$this->assertInstanceOf('Forkwars\\World\\World', $world);
-        $this->assertInstanceOf('Forkwars\\World\\Terrain\\Headquarter', $world->getTerrain(new Position(0, 0)));
+        	$this->assertInstanceOf('Forkwars\\World\\Terrain\\Headquarter', $world->getTerrain(new Position(0, 0)));
 	}
 	
 	public function testMakeTooLargeWidth()
 	{
-		$world = <<<EOF
+		$map = <<<EOF
 yeah
 2147483647x1
 EOF;
+		$world = $this->dut->make($map);
 	}
 	
 	public function testMakeFloatWidthOk()
@@ -125,30 +128,32 @@ yeah
 EOF;
 		$world = $this->dut->make($map);
 		$this->assertInstanceOf('Forkwars\\World\\World', $world);
-        $this->assertInstanceOf('Forkwars\\World\\Terrain\\Water', $world->getTerrain(new Position(0, 0)));
+        	$this->assertInstanceOf('Forkwars\\World\\Terrain\\Water', $world->getTerrain(new Position(0, 0)));
 	}
 	
 	/**
-     * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage Cannot find size info in map reprensation
-     */
+     	* @expectedException InvalidArgumentException
+	* @expectedExceptionMessage Cannot find size info in map reprensation
+     	*/
 	public function testWrongHeight()
 	{
-		$world = <<<EOF
+		$map = <<<EOF
 yeah
 1xa
 EOF;
+		$world = $this->dut->make($map);
 	}
 	
 	/**
-     * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage Cannot find size info in map reprensation
-     */
+     	* @expectedException InvalidArgumentException
+	* @expectedExceptionMessage Cannot find size info in map reprensation
+     	*/
 	public function testUnknownSize()
 	{
-		$world = <<<EOF
+		$map = <<<EOF
 yeah
 
 EOF;
+		$world = $this->dut->make($map);
 	}
 }
