@@ -58,6 +58,14 @@
 
         terrain.anchor.x = 1;
         terrain.anchor.y = 1;
+        if(code == 'F'){
+            terrain.tint = 0xFF0000;
+        }
+        if(code == 'f'){
+            terrain.tint = 0x0000FF;
+        }
+
+        //terrain.tint = 0xFFFFFF * Math.random();
 
         //on prend la taille de l'image agrandi 2 fois car image 16*16 alors qu'on a des zones de 32*32.
         terrain.scale.x = terrain.scale.y = 4; //2 fois pour etre en 32*32 et 2 fois pour l'agrandissement.
