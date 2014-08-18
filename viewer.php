@@ -4,10 +4,21 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Forkwars\World\WorldFactory;
 
-// Create a world
-$worldFactory = new WorldFactory();
-$mapString = file_get_contents(__DIR__ . '/data/basic.map');
-$world = $worldFactory->make($mapString);
+// Retrieve a world or create one
+if(! file_exists('game.cache') || isset($_GET['reset'])){
+    $worldFactory = new WorldFactory();
+    $mapString = file_get_contents(__DIR__ . '/data/basic.map');
+    $world = $worldFactory->make($mapString);
+} else {
+    $world = unserialize(file_get_contents('game.cache'));
+}
+
+// apply some logic on world
+
+
+// Save it !
+file_put_contents('game.cache', serialize($world));
+
 ?>
 <html>
 <head>
@@ -15,6 +26,9 @@ $world = $worldFactory->make($mapString);
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
+    <h1>Day <?php echo $world->day; ?></h1>
+    <p>Refresh to play the next day</p>
+    <a href="/viewer.php?reset=1">Reset the game</a><br />
 
     <!-- scripts -->
     <script type="text/javascript" src="/pixi.js"></script>
@@ -27,6 +41,8 @@ $world = $worldFactory->make($mapString);
                 ['<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>],
                 <?php endfor; endfor; ?>
             ]);
+
+
         })(document.World);
     </script>
 </body>

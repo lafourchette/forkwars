@@ -23,6 +23,8 @@ class World
 
     private $unitList = array();
 
+    public $day = 0;
+
     public function __construct($name, $width, $height)
     {
         $this->name = $name;
