@@ -126,7 +126,7 @@ On inclus la librairy pixi.js, possibilité de l'intégrer directement au projet
 		terrain.position.y = y*32*2+64;
 		terrain.setInteractive(true);
         terrain.click = terrain.clap = function(data){
-            alert(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
+            console.log(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
         }
         if(terrain.width > 64){
             scale = 64/terrain.width;
