@@ -3,6 +3,7 @@
 namespace Forkwars\World\Unit;
 
 use Forkwars\Position;
+use Forkwars\World\Thing;
 
 class Infantry extends Unit
 {
@@ -11,5 +12,10 @@ class Infantry extends Unit
     public function moveTo(Position $to)
     {
         $this->setWorldPosition($to);
+    }
+
+    public function moveToward(Thing $target)
+    {
+        throw new \Exception('please do something');
     }
 }

@@ -9,6 +9,13 @@ use Forkwars\Position;
  */
 class Thing
 {
+
+    const TEAM_RED     = 0;
+    const TEAM_BLUE    = 1;
+    const TEAM_NONE    = 2;
+
+    public $team;
+
     private $world;
 
     public function setWorld($world)

@@ -1,6 +1,7 @@
 <?php
 
 namespace Forkwars\General;
+use Forkwars\World\World;
 
 /**
  * Can give orders when looking at a world map.

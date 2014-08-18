@@ -19,7 +19,7 @@ class World
 
     public $height;
 
-    private $terrainMap;
+    private $terrainMap = array();
 
     private $unitList = array();
 
@@ -45,6 +45,34 @@ class World
         $this->unitList[] = $unit;
         $unit->setWorldPosition($position);
         $unit->setWorld($this);
+    }
+
+    // mixed can be a string, a class, a name... lot of things, terrain or unit
+    // we want to make it natural for a general to find its units
+    // team is a integer, 0 = red, 1 = blue
+    public function find($mixed, $team)
+    {
+        // find terrains
+        foreach($this->terrainMap as $t)
+        {
+            $className = get_class($t);
+            if (stripos($className, $mixed) !== false &&
+                $t->team == $team) {
+                return $t;
+            }
+        }
+
+        // find units
+        foreach($this->unitList as $u)
+        {
+            $className = get_class($u);
+            if (stripos($className, $mixed) !== false &&
+                $u->team == $team) {
+                return $u;
+            }
+        }
+
+        return false;
     }
 
     public function getNeighboringPositions(Position $position)

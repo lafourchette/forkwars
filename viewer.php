@@ -14,7 +14,8 @@ if(! file_exists('game.cache') || isset($_GET['reset'])){
 }
 
 // apply some logic on world
-
+$red = new \Forkwars\General\NaiveBot();
+$red->giveOrders($world);
 
 // Save it !
 file_put_contents('game.cache', serialize($world));
