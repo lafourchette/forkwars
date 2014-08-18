@@ -20,19 +20,14 @@ $world = $worldFactory->make($mapString);
     <script type="text/javascript" src="/pixi.js"></script>
     <script type="text/javascript" src="/main.js"></script>
     <script type="text/javascript">
-        var world = new World(<?= $world->height ?>, <?= $world->width ?>);
-        world.init();
-        world.define({
-            <?php for($y = 0; $y < $world->height ; $y++) :?>
-
-            <?php for($x = 0; $x < $world->width ; $x++) :?>
-
-            createTerrain('<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>)
-
-            <?php endfor; ?>
-
-            <?php endfor; ?>
-        });
+        (function(World){
+            var world = new World(<?= $world->height ?>, <?= $world->width ?>);
+            world.init(document.body, [
+                <?php for($y = 0; $y < $world->height ; $y++) : for($x = 0; $x < $world->width ; $x++) : ?>
+                ['<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>],
+                <?php endfor; endfor; ?>
+            ]);
+        })(document.World);
     </script>
 </body>
 </html>

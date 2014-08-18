@@ -1,58 +1,60 @@
 ;
-(function(document){
+(function(document, PIXI){
 
     var World = function(height, width){
         this.height = height;
         this.width  = width;
+
+        // texture cache
+        this.texturesTerrains = new Array();
+        this.terrainMap = null;
     }
 
-    World.prototype.init = function(){
-        //on stocke les textures des différents terrains pour ne pas les initialiser plus d'une fois (gain de ressources et de temps)
-        var texturesTerrains = new Array();
+    World.prototype.init = function(element, terrainMap)
+    {
+        this.terrainMap = terrainMap;
 
-        // create an new instance of a pixi stage
-        var stage = new PIXI.Stage(0x97c56e, true);
-        // create a renderer instance
-        var renderer = PIXI.autoDetectRenderer(this.width*32*2, this.height*32*2, null);
+        // Init PIXI stage
+        this.stage = new PIXI.Stage(0x97c56e, true);
+        this.renderer = PIXI.autoDetectRenderer(this.width*32*2, this.height*32*2, null);
+        element.appendChild( this.renderer.view );
 
-        document.body.appendChild(renderer.view);
-        renderer.view.style.position = "absolute";
-        renderer.view.style.top = "0px";
-        renderer.view.style.left = "0px";
-        requestAnimFrame( animate );
+        var that = this;
+        requestAnimFrame( function(){
+            that.renderer.render(that.stage);
+        });
 
-        // create an array of assets to load
-        var assetsToLoader = [ "sprites.json"];
-
-        // create a new loader
-        loader = new PIXI.AssetLoader(assetsToLoader);
-
-        // use callback
-        loader.onComplete = onAssetsLoaded
-
-        //begin load
+        // Load textures
+        loader = new PIXI.AssetLoader([ "sprites.json" ]);
+        loader.onComplete = function(){that.onAssetLoaded()};
         loader.load();
     };
 
     World.prototype.onAssetLoaded = function(){
-
+        var that = this;
+        this.terrainMap.forEach(function(t){
+            console.log(t);
+            that.createTerrain(t[0], t[1], t[2]);
+        });
+        requestAnimFrame( function(){
+            that.renderer.render(that.stage);
+        });
     };
 
-    World.prototype.animate = function(){
-        requestAnimFrame( animate );
-        renderer.render(stage);
-    };
-
-    World.prototype.createTerrain = function(x, y){
-        var iconeTerrain = code+".png";
-
-        if(!texturesTerrains[iconeTerrain])
-        {
-            var texture = PIXI.Texture.fromFrame(iconeTerrain);
-            texturesTerrains[iconeTerrain] = texture;
+    World.prototype.createTerrain = function(code, x, y){
+        if(! code){
+            return;
         }
 
-        var terrain = new PIXI.Sprite(texturesTerrains[iconeTerrain]);
+        var iconeTerrain = code+".png";
+
+        if(! this.texturesTerrains[iconeTerrain])
+        {
+            var texture = PIXI.Texture.fromFrame(iconeTerrain);
+            this.texturesTerrains[iconeTerrain] = texture;
+        }
+
+        var terrain = new PIXI.Sprite(this.texturesTerrains[iconeTerrain]);
 
         terrain.anchor.x = 1;
         terrain.anchor.y = 1;
@@ -67,7 +69,7 @@
         terrain.position.y = y*32*2+64;
         terrain.setInteractive(true);
         terrain.click = terrain.clap = function(data){
-            alert(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
+            console.log(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
         }
         if(terrain.width > 64){
             scale = 64/terrain.width;
@@ -75,8 +77,8 @@
         }
 
         // add it to the stage
-        stage.addChild(terrain);
+        this.stage.addChild(terrain);
     };
 
     document.World = World;
-})(document);
+})(document, PIXI);
