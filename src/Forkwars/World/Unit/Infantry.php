@@ -21,6 +21,18 @@ class Infantry extends Unit
 
     public function moveToward(Thing $target)
     {
-        throw new \Exception('please do something');
+        $b = $target->getWorldPosition();
+        $a = $this->getWorldPosition();
+        $dx = $b->x - $a->x;
+        $dy = $b->y - $a->y;
+        if(abs($dx) > abs($dy)){ // shall move on x axis
+            $this->getWorldPosition()->x += $dx > 0 ? 1 : -1;
+        } else {
+            $this->getWorldPosition()->y += $dy > 0 ? 1 : -1;
+        }
+    }
+
+    public function capture(){
+        throw new \Exception('Won the game');
     }
 }

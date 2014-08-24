@@ -8,6 +8,7 @@ use Forkwars\World\Terrain\Headquarter;
 use Forkwars\World\Terrain\Land;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\World\Terrain\Water;
+use Forkwars\World\Unit\Unit;
 
 class TerrainFactory
 {
@@ -29,6 +30,7 @@ class TerrainFactory
             case 'f':
             case 'a': // neutral
                 $t = new Factory();
+                $t->team = $code == 'F' ? Unit::TEAM_RED : Unit::TEAM_BLUE;
                 break;
             case 'C':
             case 'c':
