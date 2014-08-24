@@ -11,6 +11,7 @@ if(! file_exists('game.cache') || isset($_GET['reset'])){
     $world = $worldFactory->make($mapString);
 } else {
     $world = unserialize(file_get_contents('game.cache'));
+    $world->day++;
 }
 
 // apply some logic on world
@@ -37,13 +38,17 @@ file_put_contents('game.cache', serialize($world));
     <script type="text/javascript">
         (function(World){
             var world = new World(<?= $world->height ?>, <?= $world->width ?>);
+            // Draw terrain
             world.init(document.body, [
                 <?php for($y = 0; $y < $world->height ; $y++) : for($x = 0; $x < $world->width ; $x++) : ?>
                 ['<?php echo $world->getTerrain(new \Forkwars\Position($x, $y))->getCode(); ?>', <?php echo $x; ?>, <?php echo $y; ?>],
                 <?php endfor; endfor; ?>
+            ],
+            [
+                <?php foreach($world->getUnits() as $unit) : ?>
+                ['<?php echo $unit->getCode(); ?>', <?php echo $unit->getWorldPosition()->x; ?>, <?php echo $unit->getWorldPosition()->y; ?>],
+                <?php endforeach; ?>
             ]);
-
-
         })(document.World);
     </script>
 </body>

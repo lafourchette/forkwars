@@ -28,4 +28,19 @@ class Unit extends Thing
     public function isAt(Terrain $terrain) {
         return $this->getWorldPosition()->equals($terrain->getWorldPosition());
     }
+
+    /**
+     * @var string $code Terrain code, for string representation
+     */
+    protected $code;
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
 }

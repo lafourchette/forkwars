@@ -10,9 +10,10 @@
         this.terrainMap = null;
     }
 
-    World.prototype.init = function(element, terrainMap)
+    World.prototype.init = function(element, terrainMap, unitList)
     {
         this.terrainMap = terrainMap;
+        this.unitList = unitList;
 
         // Init PIXI stage
         this.stage = new PIXI.Stage(0x97c56e, true);
@@ -33,6 +34,10 @@
     World.prototype.onAssetLoaded = function(){
         var that = this;
         this.terrainMap.forEach(function(t){
+            console.log(t);
+            that.createTerrain(t[0], t[1], t[2]);
+        });
+        this.unitList.forEach(function(t){
             console.log(t);
             that.createTerrain(t[0], t[1], t[2]);
         });

@@ -101,6 +101,11 @@ class World
         return false;
     }
 
+    public function getUnits()
+    {
+        return $this->unitList;
+    }
+
     /**
      * Will fill the entire World with $terrain clone instance.
      *
