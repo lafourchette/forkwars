@@ -10,6 +10,6 @@ class Factory extends Terrain
     public function spawn(Unit $unit)
     {
         $this->getWorld()->spawnUnit($this->getWorldPosition(), $unit);
-        $unit->team = Thing::TEAM_RED; //$this->team;
+        $unit->setTeam($this->getTeam());
     }
 }

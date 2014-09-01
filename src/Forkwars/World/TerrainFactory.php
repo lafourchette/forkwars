@@ -30,7 +30,7 @@ class TerrainFactory
             case 'f':
             case 'a': // neutral
                 $t = new Factory();
-                $t->team = $code == 'F' ? Unit::TEAM_RED : Unit::TEAM_BLUE;
+                $t->setTeam($code == 'F' ? Unit::TEAM_RED : Unit::TEAM_BLUE);
                 break;
             case 'C':
             case 'c':

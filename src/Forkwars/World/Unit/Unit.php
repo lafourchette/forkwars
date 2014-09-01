@@ -5,6 +5,9 @@ namespace Forkwars\World\Unit;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\World\Thing;
 
+/**
+ * Something that can move. Always part of a team.
+ */
 class Unit extends Thing
 {
     public $health;
