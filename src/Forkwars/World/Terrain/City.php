@@ -1,6 +1,6 @@
 <?php
 
-namespace Forkwars\World\Terrain;
+namespace Forkwars\World\CapturableTerrain;
 
-class City extends Terrain
+class City extends CapturableTerrain
 {}

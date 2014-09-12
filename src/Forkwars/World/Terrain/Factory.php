@@ -1,11 +1,11 @@
 <?php
 
-namespace Forkwars\World\Terrain;
+namespace Forkwars\World\CapturableTerrain;
 
 use Forkwars\World\Thing;
 use Forkwars\World\Unit\Unit;
 
-class Factory extends Terrain
+class Factory extends CapturableTerrain
 {
     public function spawn(Unit $unit)
     {

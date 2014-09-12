@@ -32,7 +32,9 @@ class Infantry extends Unit
         }
     }
 
-    public function capture(){
+    public function capture()
+    {
+        // current terrain must be capturable
         throw new \Exception('Won the game');
     }
 }
