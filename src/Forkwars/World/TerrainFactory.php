@@ -25,6 +25,7 @@ class TerrainFactory
             case 'R':
             case 'b':
                 $t = new Headquarter();
+                $t->setTeam($code == 'R' ? Unit::TEAM_RED : Unit::TEAM_BLUE);
                 break;
             case 'F':
             case 'f':

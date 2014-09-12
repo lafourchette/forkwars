@@ -57,7 +57,7 @@ class World
         {
             $className = get_class($t);
             if (stripos($className, $mixed) !== false &&
-                $t->team == $team) {
+                $t->getTeam() == $team) {
                 return $t;
             }
         }
@@ -67,7 +67,7 @@ class World
         {
             $className = get_class($u);
             if (stripos($className, $mixed) !== false &&
-                $u->team == $team) {
+                $u->getTeam() == $team) {
                 return $u;
             }
         }

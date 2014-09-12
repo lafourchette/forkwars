@@ -3,6 +3,7 @@
 namespace Forkwars\General;
 use Forkwars\World\Unit\Infantry;
 use Forkwars\World\World;
+use Forkwars\World\Thing;
 
 /**
  * NaiveBot creates an infantry, make it run towards the
@@ -14,8 +15,8 @@ class NaiveBot implements GeneralInterface
 {
     public function giveOrders(World $world)
     {
-        $infantry = $world->find('Infantry', 0);
-        $opHQ = $world->find('Headquarter', 1);
+        $infantry = $world->find('Infantry', Thing::TEAM_RED);
+        $opHQ = $world->find('Headquarter', Thing::TEAM_BLUE);
         if(! $opHQ){throw new \Exception('No headquarter found');}
         if ($infantry) {
             if ($infantry->isAt($opHQ)) {
@@ -24,8 +25,8 @@ class NaiveBot implements GeneralInterface
                 $infantry->moveToward($opHQ);
             }
         } else {
-            $factory = $world->find('Factory', 0);
-            if(! $factory){throw new \Exception('No headquarter found');}
+            $factory = $world->find('Factory', Thing::TEAM_RED);
+            if(! $factory){throw new \Exception('No factory found');}
             $factory->spawn(new Infantry());
         }
     }

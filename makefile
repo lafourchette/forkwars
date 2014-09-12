@@ -18,3 +18,6 @@ vendor: composer.phar
 
 clean:
 	rm -rf vendor
+
+test:
+	php -S localhost:8000
