@@ -12,7 +12,7 @@ class Infantry extends Unit
      */
     protected $code = 'infantry';
 
-    public $moveCount = 3;
+    public $moveCount = 1;
 
     public function moveTo(Position $to)
     {

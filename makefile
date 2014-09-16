@@ -16,8 +16,11 @@ composer.phar: check
 vendor: composer.phar
 	php composer.phar install --prefer-dist
 
-clean:
+mrproper:
 	rm -rf vendor
 
-test:
+clean:
+	rm -rf game.cache
+
+test: | clean
 	php -S localhost:8000
