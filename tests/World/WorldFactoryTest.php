@@ -1,12 +1,9 @@
 <?php
 
-namespace Forkwars\Tests\World;
-
 use Forkwars\Position;
 use Forkwars\World\WorldFactory;
-use Forkwars\Tests\ProphecyTestCase;
 
-class WorldFactoryTest extends ProphecyTestCase
+class WorldFactoryTest extends \ProphecyTestCase
 {
     // Device Under Test
     private $dut;

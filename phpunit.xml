@@ -11,11 +11,11 @@
         processIsolation            = "false"
         stopOnFailure               = "false"
         syntaxCheck                 = "false"
-        bootstrap                   = "vendor/autoload.php" >
+        bootstrap                   = "tests/bootstrap.php" >
 
     <testsuites>
-        <testsuite name="src"><!-- Unit Tests only -->
-            <directory>src/Forkwars/Tests</directory>
+        <testsuite name="tests"><!-- Unit Tests only -->
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -1,16 +1,12 @@
 <?php
 
-namespace Forkwars\Tests\Algorithm;
-
 use Forkwars\Position;
-use Forkwars\Tests\ProphecyTestCase;
 use Forkwars\World\Algorithm\ReachablePositionsAlgorithm;
 use Forkwars\World\Terrain\Land;
-use Forkwars\World\Unit\Infantry;
 use Forkwars\World\Unit\Unit;
 use Forkwars\World\World;
 
-class ReachablePositionsAlgorithmTest extends ProphecyTestCase
+class ReachablePositionsAlgorithmTest extends \ProphecyTestCase
 {
     private $world;
 

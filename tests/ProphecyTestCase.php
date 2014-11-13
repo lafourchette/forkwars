@@ -1,7 +1,5 @@
 <?php
 
-namespace Forkwars\Tests;
-
 use Prophecy\Prophet;
 
 /**

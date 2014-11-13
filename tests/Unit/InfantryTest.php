@@ -1,15 +1,12 @@
 <?php
 
-namespace Forkwars\Tests\Unit;
-
-use Forkwars\Tests\ProphecyTestCase;
 use Forkwars\World\Terrain\Land;
 use Forkwars\World\World;
 use Forkwars\Position;
 use Forkwars\World\Unit\Infantry;
 
 // @todo shall maybe become a Unit test
-class InfantryTest extends ProphecyTestCase
+class InfantryTest extends \ProphecyTestCase
 {
     private $world;
 
