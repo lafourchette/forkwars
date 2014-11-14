@@ -5,9 +5,9 @@ namespace Forkwars\World;
 use Forkwars\Position;
 
 /**
- * Most basic type of thing in the game.
+ * A thing is part of a World, got a position on it, and which is sometimes part of a team.
  *
- * A thing is part of a world, got a position on it, and which is sometimes part of a team.
+ * Everything is a Thing.
  */
 class Thing
 {
@@ -32,7 +32,13 @@ class Thing
      */
     public function setWorld(World $world)
     {
+        $world->registerThing($this);
         $this->world = $world;
+    }
+
+    public function __sleep()
+    {
+        $this->world = null;
     }
 
     /**

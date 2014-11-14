@@ -32,6 +32,14 @@ class World
         $this->height=$height;
     }
 
+    /**
+     * Make something part of the world
+     */
+    public function registerThing(Thing $thing)
+    {
+
+    }
+
     public function setTerrain(Position $position, Terrain $terrain)
     {
         $this->terrainMap[$this->pos($position)] = $terrain;

@@ -16,7 +16,7 @@ class Infantry extends Unit
 
     public function moveTo(Position $to)
     {
-        $this->setWorldPosition($to);
+        return $this->setWorldPosition($to);
     }
 
     public function moveToward(Thing $target)

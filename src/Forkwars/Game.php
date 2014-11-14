@@ -46,6 +46,9 @@ final class Game
         $result = new Result();
 
         // Play the game
+        $this->redGeneral->doActions($this->world);
+        // $orderList = $this->world->flushOrderList();
+        $this->winCondition($this->world);
 
 
         return $result;

@@ -10,7 +10,7 @@ use Forkwars\World\World;
  */
 class DumbBot implements GeneralInterface
 {
-    public function giveOrders(World $world)
+    public function doActions(World $world)
     {
         $infantry = $world->find('Infantry', 0);
         if ($infantry) {

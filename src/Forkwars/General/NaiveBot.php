@@ -13,7 +13,7 @@ use Forkwars\World\Thing;
  */
 class NaiveBot implements GeneralInterface
 {
-    public function giveOrders(World $world)
+    public function doActions(World $world)
     {
         $infantry = $world->find('Infantry', Thing::TEAM_RED);
         $opHQ = $world->find('Headquarter', Thing::TEAM_BLUE);

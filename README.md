@@ -37,3 +37,15 @@ Fill or solve [issues](https://github.com/lafourchette/forkwars/issues).
 ## Hall Of Fame
 
 [rodrigue67](https://github.com/rodrigue67)
+
+## Insights
+
+If you want to create a General, you need to understand a few core concepts.
+
+A World holds two types of objects : Terrains and Units. For example, Forest is a Terrain and Infantry is an Unit.
+Your General is given a World instance on which he can search for these objects.
+
+He can then perform Actions on these object, say Infantry shall Capture an Headquarter.
+
+In a client context, these Actions are recorded by the Game instance and sent to the server.
+

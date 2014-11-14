@@ -16,5 +16,5 @@ use Forkwars\World\World;
 
 interface GeneralInterface
 {
-    public function giveOrders(World $world);
+    public function doActions(World $world);
 }
