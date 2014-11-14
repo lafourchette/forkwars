@@ -4,23 +4,22 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Forkwars\World\WorldFactory;
 
-// Retrieve a world or create one
-if(! file_exists('game.cache') || isset($_GET['reset'])){
-    $worldFactory = new WorldFactory();
-    $mapString = file_get_contents(__DIR__ . '/data/basic.map');
-    $world = $worldFactory->make($mapString);
-} else {
-    $world = unserialize(file_get_contents('game.cache'));
-    $world->day++;
-}
+// Create world
+$worldFactory = new WorldFactory();
+$world = $worldFactory->make(file_get_contents(__DIR__ . '/data/basic.map'));
 
-// apply some logic on world
-$red = new \Forkwars\General\NaiveBot();
-$red->giveOrders($world);
+$game = new \Forkwars\Game(
+    $world,
+    new \Forkwars\General\NaiveBot(),
+    new \Forkwars\General\DumbBot(),
+    new \Forkwars\WinCondition\CapturedHeadquarter()
+);
 
-// Save it !
-file_put_contents('game.cache', serialize($world));
+$result = $game->run();
 
+var_dump($result);
+
+exit;
 ?>
 <html>
 <head>
