@@ -1,8 +1,7 @@
 <?php
 
-namespace Forkwars\World\CapturableTerrain;
+namespace Forkwars\World\Terrain;
 
-use Forkwars\World\Thing;
 use Forkwars\World\Unit\Unit;
 
 class Factory extends CapturableTerrain

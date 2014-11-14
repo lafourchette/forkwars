@@ -2,8 +2,6 @@
 
 namespace Forkwars\World\Terrain;
 
-use Forkwars\World\Thing;
-
 class CapturableTerrain extends Terrain
 {
     private $captureAmount = 20;

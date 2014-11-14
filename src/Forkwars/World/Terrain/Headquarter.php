@@ -1,6 +1,6 @@
 <?php
 
-namespace Forkwars\World\CapturableTerrain;
+namespace Forkwars\World\Terrain;
 
 use Forkwars\World\Unit\Unit;
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace Forkwars\General;
+use Forkwars\World\World;
 
 /**
  * Dumbot creates an infantry and make it walk randomly.
