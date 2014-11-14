@@ -21,14 +21,14 @@ class Infantry extends Unit
 
     public function moveToward(Thing $target)
     {
-        $b = $target->getWorldPosition();
-        $a = $this->getWorldPosition();
+        $b = $target->getPosition();
+        $a = $this->getPosition();
         $dx = $b->x - $a->x;
         $dy = $b->y - $a->y;
         if(abs($dx) > abs($dy)){ // shall move on x axis
-            $this->getWorldPosition()->x += $dx > 0 ? 1 : -1;
+            $this->getPosition()->x += $dx > 0 ? 1 : -1;
         } else {
-            $this->getWorldPosition()->y += $dy > 0 ? 1 : -1;
+            $this->getPosition()->y += $dy > 0 ? 1 : -1;
         }
     }
 

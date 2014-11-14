@@ -27,19 +27,6 @@ class Thing
 
     private $team;
 
-    /**
-     * @param World $world
-     */
-    public function setWorld(World $world)
-    {
-        $world->registerThing($this);
-        $this->world = $world;
-    }
-
-    public function __sleep()
-    {
-        $this->world = null;
-    }
 
     /**
      * @return World
@@ -50,20 +37,9 @@ class Thing
     }
 
     /**
-     * @param Position $position
-     * @return $this
-     */
-    public function setWorldPosition(Position $position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
      * @return Position
      */
-    public function getWorldPosition()
+    public function getPosition()
     {
         return $this->position;
     }

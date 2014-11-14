@@ -51,6 +51,9 @@ class World
     public function spawnUnit(Position $position, Unit $unit)
     {
         $this->unitList[] = $unit;
+
+        // Add Unit ?
+
         $unit->setWorldPosition($position);
         $unit->setWorld($this);
     }

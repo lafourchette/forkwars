@@ -2,6 +2,8 @@
 
 namespace Forkwars\World\Unit;
 
+use Forkwars\Position;
+use Forkwars\World\Action;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\World\Thing;
 
@@ -29,21 +31,15 @@ class Unit extends Thing
     public $isAir;
 
     public function isAt(Terrain $terrain) {
-        return $this->getWorldPosition()->equals($terrain->getWorldPosition());
+        return $this->getPosition()->equals($terrain->getPosition());
     }
 
     /**
-     * @var string $code Terrain code, for string representation
+     * @param Position $position
+     * @return Action
      */
-    protected $code;
-
-    public function setCode($code)
+    public function moveTo(Position $position)
     {
-        $this->code = $code;
-    }
 
-    public function getCode()
-    {
-        return $this->code;
     }
 }

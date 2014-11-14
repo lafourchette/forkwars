@@ -6,9 +6,15 @@ use Forkwars\World\Unit\Unit;
 
 class Factory extends CapturableTerrain
 {
-    public function spawn(Unit $unit)
+    /**
+     * @param $unitClass
+     */
+    public function spawn($unitClass)
     {
-        $this->getWorld()->spawnUnit($this->getWorldPosition(), $unit);
+        $this->
+
+
+        $this->getWorld()->spawnUnit($this->getPosition(), $unit);
         $unit->setTeam($this->getTeam());
     }
 }
