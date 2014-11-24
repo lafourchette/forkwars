@@ -14,13 +14,9 @@ class DumbBot implements GeneralInterface
     {
         $infantry = $world->find('Infantry', 0);
         if ($infantry) {
-            $order = $infantry->move(rand(0, 3));
+            $infantry->move(rand(0, 3));
         } else {
-            $order = $world->find('Factory', 0)->spawn('Infantry');
+            $world->find('Factory', 0)->spawn('Infantry');
         }
-
-        return array(
-            $order
-        );
     }
 }

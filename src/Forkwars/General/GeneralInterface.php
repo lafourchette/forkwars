@@ -13,8 +13,13 @@ use Forkwars\World\World;
  * special powers.
  *
  */
-
 interface GeneralInterface
 {
+    /**
+     *
+     *
+     * @param World $world
+     * @return void
+     */
     public function doActions(World $world);
 }

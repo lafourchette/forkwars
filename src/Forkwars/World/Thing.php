@@ -27,6 +27,10 @@ class Thing
 
     private $team;
 
+    public function __construct(World $world, Position $position, Team $team)
+    {
+
+    }
 
     /**
      * @return World

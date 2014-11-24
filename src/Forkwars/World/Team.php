@@ -28,7 +28,7 @@ class Team
             throw new \Exception('cannot buy ' . $unitClass);
         }
 
-        
+
     }
 
     public function canBuy($unitClass)
