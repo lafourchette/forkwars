@@ -2,7 +2,7 @@
 
 namespace Forkwars\World\Game;
 
-class Result
+class Record
 {
     const IS_WINNER       = 'winner';
     const IS_LOSER        = 'loser';

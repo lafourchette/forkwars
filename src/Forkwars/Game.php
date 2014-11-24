@@ -4,7 +4,7 @@ namespace Forkwars;
 
 use Forkwars\General\GeneralInterface;
 use Forkwars\WinCondition\WinConditionInterface;
-use Forkwars\World\Game\Result;
+use Forkwars\World\Game\Record;
 use Forkwars\World\World;
 
 /**
@@ -39,18 +39,28 @@ final class Game
     /**
      * Play the game
      *
-     * @return Result how the game finished
+     * @return Record how the game finished
      */
     public function run()
     {
-        $result = new Result();
+        $record = new Record();
 
-        // Play the game
-        $this->redGeneral->doActions($this->world);
+        while(
+            ! $this->generalPlayAndWon($this->redGeneral)
+            &&
+            ! $this->generalPlayAndWon($this->blueGeneral)
+            &&
+            ! $record->reachedMaxLength()
+        ){}
+
+        return $record;
+    }
+
+    public function generalPlayAndWon(GeneralInterface $general)
+    {
+        $general->doActions($this->world);
         // $orderList = $this->world->flushOrderList();
         $this->winCondition($this->world);
-
-
-        return $result;
+        return true;
     }
 }

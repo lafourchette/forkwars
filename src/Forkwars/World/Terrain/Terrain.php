@@ -28,4 +28,16 @@ class Terrain extends Thing
     {
         return $this->code;
     }
+
+    public function canHeal()
+    {
+        return $this->metadata['healing'];
+    }
+
+    public function heal()
+    {
+        // canHeal or throw ImpossibleActionException
+        // getChild
+        // if has a child, heal it.
+    }
 }
