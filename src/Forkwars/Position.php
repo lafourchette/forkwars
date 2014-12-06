@@ -2,7 +2,9 @@
 
 namespace Forkwars;
 
-class Position
+use Forkwars\World\Thing;
+
+class Position extends Thing
 {
     public $x, $y;
 

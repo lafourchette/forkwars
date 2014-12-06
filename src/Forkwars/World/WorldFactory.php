@@ -13,12 +13,7 @@ class WorldFactory
 {
     private $terrainFactory;
 
-    public function __construct()
-    {
-        $this->terrainFactory = new TerrainFactory();
-    }
-
-    public function setTerrainFactory($terrainFactory)
+    public function __construct(TerrainFactory $terrainFactory)
     {
         $this->terrainFactory = $terrainFactory;
     }
@@ -42,8 +37,8 @@ class WorldFactory
 
             $line = $lines[2 + $y];
             for ($x = 0; $x < $width; $x++) {
-                $terrain = $this->terrainFactory->make($line[$x], $world);
-                $world->setTerrain(new Position($x, $y), $terrain);
+                $terrain = $this->terrainFactory->make($line[$x]);
+                $world->getPosition($x, $y)->setChildren(array($terrain));
             }
         }
 

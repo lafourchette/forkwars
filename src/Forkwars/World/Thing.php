@@ -11,56 +11,52 @@ use Forkwars\Position;
  */
 class Thing
 {
-    /**
-     * @var World Which world it is part of.
-     */
-    private $world;
+    private $children = array();
 
-    /**
-     * @var Position Where this thing is on the world.
-     */
-    private $position;
+    private $parent = null;
 
-    const TEAM_RED     = 0;
-    const TEAM_BLUE    = 1;
-    const TEAM_NONE    = 2;
-
-    private $team;
-
-    public function __construct(World $world, Position $position, Team $team)
+    public function setParent(Thing $parent)
     {
-
+        $this->parent = $parent;
+        return $this;
     }
 
     /**
-     * @return World
+     * @return Thing
      */
-    public function getWorld()
+    public function getParent()
     {
-        return $this->world;
+        return $this->parent;
     }
 
     /**
-     * @return Position
+     * @return Thing[]
      */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function setChildren($mixed)
+    {
+        $this->children = $mixed;
+
+        // Update parent reference for each Child
+        foreach($mixed as $child){
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function __sleep()
+    {
+        // Deal with circular references.
+        $this->parent = null;
+    }
+
     public function getPosition()
     {
-        return $this->position;
-    }
-
-    /**
-     * @param int $team
-     */
-    public function setTeam($team)
-    {
-        $this->team = $team;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTeam()
-    {
-        return $this->team;
+        return null;
     }
 }

@@ -19,33 +19,47 @@ class World
 
     public $height;
 
-    private $terrainMap = array();
+    /**
+     * @var Position[]
+     */
+    private $grid = array();
 
     private $unitList = array();
 
     public $day = 0;
 
+    /**
+     * @param $name
+     * @param $width
+     * @param $height
+     * @todo limit size
+     */
     public function __construct($name, $width, $height)
     {
         $this->name = $name;
         $this->width= $width;
         $this->height=$height;
+
+        // Creating the Position grid.
+        for ($x = 0; $x < $width; $x++) {
+            for ($y = 0; $y < $height; $y++) {
+                $pos = new Position($x, $y);
+                $this->grid[$this->pos($pos)] = $pos;
+            }
+        }
     }
 
     /**
-     * Make something part of the world
+     * Get a position on the grid
+     *
+     * @param $x
+     * @param $y
+     * @return Position
      */
-    public function registerThing(Thing $thing)
+    public function getPosition($x, $y)
     {
-
-    }
-
-    public function setTerrain(Position $position, Terrain $terrain)
-    {
-        $this->terrainMap[$this->pos($position)] = $terrain;
-        $terrain->setWorldPosition($position);
-
-        return $this;
+        $i = $this->pos($x, $y);
+        return $this->grid[$i];
     }
 
     public function spawnUnit(Position $position, Unit $unit)
@@ -64,7 +78,7 @@ class World
     public function find($mixed, $team)
     {
         // find terrains
-        foreach($this->terrainMap as $t)
+        foreach($this->grid as $t)
         {
             $className = get_class($t);
             if (stripos($className, $mixed) !== false &&
@@ -137,9 +151,17 @@ class World
 
     public function getTerrain($position)
     {
-        return $this->terrainMap[$this->pos($position)];
+        return $this->grid[$this->pos($position)];
     }
 
+    /**
+     * Linearize 2 dimensions position for performance issues.
+     *
+     * @param $x
+     * @param null $y
+     * @return mixed
+     * @throws \Exception
+     */
     private function pos($x, $y = null)
     {
         if ($x instanceof Position) {

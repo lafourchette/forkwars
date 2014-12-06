@@ -5,24 +5,5 @@
         "defense": 30
     },
     {
-        "name": "water",
-        "code": "i",
-        "defense": 30
-    },
-    {
-        "name": "land",
-        "code": "x",
-        "defense": 30
-    },
-    {
-        "name": "headquarter",
-        "code": "r",
-        "defense": 30,
-        "healing": true,
-        "capturable": true,
-        "income": 200
-    },
-    {
-        "name": "factory"
     }
 ]

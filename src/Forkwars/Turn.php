@@ -5,7 +5,7 @@ namespace Forkwars;
 /**
  * All the actions performed by a General, along with metadata
  */
-class Day
+class Turn
 {
     // addActions
 

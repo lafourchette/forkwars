@@ -4,6 +4,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Forkwars\World\WorldFactory;
 
+$terrainFactory = new \Forkwars\World\TerrainFactory();
+
+
 // Create world
 $worldFactory = new WorldFactory();
 $world = $worldFactory->make(file_get_contents(__DIR__ . '/data/basic.map'));

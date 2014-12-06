@@ -11,21 +11,22 @@ class WorldFactoryTest extends \ProphecyTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->dut = new WorldFactory();
         $this->mockTerrainFactory = $this->prophesize('Forkwars\\World\\TerrainFactory');
+        $this->dut = new WorldFactory($this->mockTerrainFactory->reveal());
     }
 
-    public function testMakeOk()
+    public function testMake()
     {
+        $this->mockTerrainFactory->make('i')->willReturn(new \Forkwars\World\Thing());
+
         $map = <<<EOF
 yeah
 1x1
 i
 EOF;
         $world = $this->dut->make($map);
-
         $this->assertInstanceOf('Forkwars\\World\\World', $world);
-        $this->assertInstanceOf('Forkwars\\World\\Terrain\\Water', $world->getTerrain(new Position(0, 0)));
+        var_dump($world);
     }
 
     public function testMakeMissingName()
@@ -41,15 +42,6 @@ EOF;
         $world = <<<EOF
 101
 i
-EOF;
-    }
-
-    public function testMakeUnknownTerrain()
-    {
-        $world = <<<EOF
-yeah
-1x1
-@
 EOF;
     }
 }

@@ -1,0 +1,14 @@
+[
+    {
+        "name" : "land",
+        "footCost" : 3,
+        "trackCost": 0,
+        "wheelCost": 0,
+        "skyCost"  : 0,
+        "waterCost": 0,
+        "viewBonus" : 0,
+        "defensePower" : 1,
+        "sprite" : "land",
+        "code" : "lnd"
+    }
+]
