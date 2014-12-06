@@ -26,7 +26,6 @@ i
 EOF;
         $world = $this->dut->make($map);
         $this->assertInstanceOf('Forkwars\\World\\World', $world);
-        var_dump($world);
     }
 
     public function testMakeMissingName()
