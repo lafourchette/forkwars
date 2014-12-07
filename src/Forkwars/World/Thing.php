@@ -11,13 +11,20 @@ use Forkwars\Position;
  */
 class Thing
 {
-    private $children = array();
+    private $children = null;
 
     private $parent = null;
 
     public function setParent(Thing $parent)
     {
+        // Remove reference from previous parent
+        if($previous = $this->getParent()){
+            $previous->removeChild($this);
+        }
         $this->parent = $parent;
+        // Add new child reference
+        $parent->addChild($this);
+
         return $this;
     }
 
@@ -29,24 +36,25 @@ class Thing
         return $this->parent;
     }
 
+    public function addChild($child)
+    {
+        $this->getChildren()->attach($child);
+    }
+
+    public function removeChild($child)
+    {
+        $this->getChildren()->detach($child);
+    }
+
     /**
      * @return Thing[]
      */
     public function getChildren()
     {
-        return $this->children;
-    }
-
-    public function setChildren($mixed)
-    {
-        $this->children = $mixed;
-
-        // Update parent reference for each Child
-        foreach($mixed as $child){
-            $child->setParent($this);
+        if(is_null($this->children)){
+            $this->children = new \SplObjectStorage();
         }
-
-        return $this;
+        return $this->children;
     }
 
     public function __sleep()
@@ -57,6 +65,11 @@ class Thing
 
     public function getPosition()
     {
-        return null;
+        throw new \Exception('This thing has no position');
+    }
+
+    public function registerAction()
+    {
+        throw new \Exception('Cannot register action');
     }
 }

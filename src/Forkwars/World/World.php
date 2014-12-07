@@ -26,8 +26,6 @@ class World
 
     private $unitList = array();
 
-    public $day = 0;
-
     /**
      * @param $name
      * @param $width
@@ -60,16 +58,6 @@ class World
     {
         $i = $this->pos($x, $y);
         return $this->grid[$i];
-    }
-
-    public function spawnUnit(Position $position, Unit $unit)
-    {
-        $this->unitList[] = $unit;
-
-        // Add Unit ?
-
-        $unit->setWorldPosition($position);
-        $unit->setWorld($this);
     }
 
     // mixed can be a string, a class, a name... lot of things, terrain or unit
@@ -113,45 +101,6 @@ class World
             return ! ( $p->y < 0 || $world->height < $p->y ||
                 $p->x < 0 || $world->width < $p->x );
         });
-    }
-
-    public function getUnitAt(Position $position)
-    {
-        foreach ($this->unitList as $unit) {
-            if ($unit->getWorldPosition()->equals($position)) {
-                return $unit;
-            }
-        }
-
-        return false;
-    }
-
-    public function getUnits()
-    {
-        return $this->unitList;
-    }
-
-    /**
-     * Will fill the entire World with $terrain clone instance.
-     *
-     * @param  Terrain $terrain
-     * @return World   Fluent interface
-     */
-    public function fillWith(Terrain $terrain)
-    {
-        for ($x = 0; $x < $this->width; $x++) {
-            for ($y = 0; $y < $this->height; $y++) {
-                $pos = new Position($x, $y);
-                $this->setTerrain($pos, clone $terrain);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTerrain($position)
-    {
-        return $this->grid[$this->pos($position)];
     }
 
     /**

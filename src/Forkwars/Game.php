@@ -4,6 +4,7 @@ namespace Forkwars;
 
 use Forkwars\General\GeneralInterface;
 use Forkwars\WinCondition\WinConditionInterface;
+use Forkwars\World\Action;
 use Forkwars\World\Game\Record;
 use Forkwars\World\World;
 
@@ -58,9 +59,12 @@ final class Game
 
     public function generalPlayAndWon(GeneralInterface $general)
     {
+        $actions = array();
+        //$actions[] = $this->world->startTurn($general);
         $general->doActions($this->world);
-        // $orderList = $this->world->flushOrderList();
-        $this->winCondition($this->world);
+        // $actions = $this->world->flushOrderList();
+        //$actions[] = $this->world->endTurn($general);
+        // $this->winCondition($this->world);
         return true;
     }
 }

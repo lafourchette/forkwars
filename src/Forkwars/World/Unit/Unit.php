@@ -12,34 +12,25 @@ use Forkwars\World\Thing;
  */
 class Unit extends Thing
 {
-    public $health;
-
-    public $ammo;
-
-    public $moveCount;
-
-    public $viewCount;
-
-    public $offensePower;
-
-    public $defensePower;
-
-    public $isMarine;
-
-    public $isGround;
-
-    public $isAir;
-
-    public function isAt(Terrain $terrain) {
-        return $this->getPosition()->equals($terrain->getPosition());
+    public function getPosition()
+    {
+        return $this->getParent()->getPosition();
     }
 
     /**
      * @param Position $position
      * @return Action
      */
-    public function moveTo(Position $position)
+    public function moveTo(Thing $destination)
     {
+        // @todo canMove
+        // @todo destination is Reachable ?
+        $this->setParent($destination);
 
+        $destination->registerAction(new Action(
+            $this,
+            'moveTo',
+            $destination
+        ));
     }
 }

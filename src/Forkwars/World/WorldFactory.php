@@ -38,7 +38,7 @@ class WorldFactory
             $line = $lines[2 + $y];
             for ($x = 0; $x < $width; $x++) {
                 $terrain = $this->terrainFactory->make($line[$x]);
-                $world->getPosition($x, $y)->setChildren(array($terrain));
+                $world->getPosition($x, $y)->addChild($terrain);
             }
         }
 
