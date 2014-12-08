@@ -15,35 +15,22 @@ class Thing
 
     private $parent = null;
 
-    public function setParent(Thing $parent)
+    /**
+     * @param Thing $parent
+     * @return $this
+     */
+    public function setParent(Thing $parent = null)
     {
-        // Remove reference from previous parent
-        if($previous = $this->getParent()){
-            $previous->removeChild($this);
-        }
         $this->parent = $parent;
-        // Add new child reference
-        $parent->addChild($this);
-
         return $this;
     }
 
     /**
-     * @return Thing
+     * @return null|Thing
      */
     public function getParent()
     {
         return $this->parent;
-    }
-
-    public function addChild($child)
-    {
-        $this->getChildren()->attach($child);
-    }
-
-    public function removeChild($child)
-    {
-        $this->getChildren()->detach($child);
     }
 
     /**
@@ -55,6 +42,46 @@ class Thing
             $this->children = new \SplObjectStorage();
         }
         return $this->children;
+    }
+
+    /**
+     * Add a child to $this and sets the child's parent.
+     * @param Thing $child
+     */
+    public function addChild(Thing $child)
+    {
+        $this->getChildren()->attach($child);
+        $child->setParent($this);
+    }
+
+    /**
+     * Remove the child and makes the child orphan.
+     * @param Thing $child
+     */
+    public function removeChild(Thing $child)
+    {
+        $this->getChildren()->detach($child);
+        $child->setParent(null);
+    }
+
+    /**
+     * @param Thing $parent
+     */
+    public function attachTo(Thing $parent)
+    {
+        $this->setParent($parent);
+        $parent->getChildren()->attach($this);
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function detach()
+    {
+        $this->getParent()->getChildren()->detach($this);
+        $this->setParent(null);
+        return $this;
     }
 
     public function __sleep()
