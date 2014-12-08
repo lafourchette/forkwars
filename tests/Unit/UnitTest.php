@@ -7,13 +7,13 @@ class UnitTest extends \ProphecyTestCase
         parent::setUp();
     }
 
-    public function testMove()
+    public function testMoveTo()
     {
         $from = new \Forkwars\World\Thing();
         $to   = $this->prophesize('Forkwars\World\Thing');
         $toR  = $to->reveal();
         $to->registerAction(\Prophecy\Argument::type('Forkwars\World\Action'))->shouldBeCalled();
-        $to->addChild(\Prophecy\Argument::any())->shouldBeCalled();
+        $to->getChildren()->willReturn(new \SplObjectStorage());
 
         // Test
         $dut = new \Forkwars\World\Unit\Unit();

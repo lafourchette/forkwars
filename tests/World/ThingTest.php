@@ -48,5 +48,4 @@ class ThingTest extends \ProphecyTestCase
         $this->assertNull($child->getParent());
         $this->assertNotContains($child, $parent->getChildren());
     }
-
-} 
+}

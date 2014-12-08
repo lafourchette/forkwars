@@ -23,9 +23,11 @@ class Unit extends Thing
      */
     public function moveTo(Thing $destination)
     {
+        $this->detach();
+        $this->attachTo($destination);
+
         // @todo canMove
         // @todo destination is Reachable ?
-        $this->setParent($destination);
 
         $destination->registerAction(new Action(
             $this,
