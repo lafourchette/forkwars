@@ -3,7 +3,7 @@
 namespace Forkwars\World;
 
 use Forkwars\Exception\GameException;
-use Forkwars\World\Game\Turn;
+use Forkwars\Game\Turn;
 use Forkwars\World\Unit\Unit;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\Position;
@@ -75,6 +75,13 @@ class World extends Thing
             if ($t->getName() == $mixed) {
                 return $t;
             }
+
+            foreach($t->getChildren() as $t2)
+            {
+                if ($t2->getName() == $mixed) {
+                    return $t2;
+                }
+            }
         }
 
         return false;
@@ -128,7 +135,7 @@ class World extends Thing
     }
 
     /**
-     * @var Turn
+     * @var \Forkwars\Game\Turn
      */
     private $currentTurn = null;
 

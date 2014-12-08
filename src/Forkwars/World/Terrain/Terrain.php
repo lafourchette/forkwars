@@ -2,21 +2,12 @@
 
 namespace Forkwars\World\Terrain;
 
+use Forkwars\General\GeneralInterface;
 use Forkwars\World\Action;
-use Forkwars\World\Team;
 use Forkwars\World\Thing;
-use Forkwars\World\Unit\Unit;
 
 class Terrain extends Thing
 {
-    public $shelterPower;
-
-    public $footCost  = null;
-
-    public $tyreCost  = null;
-
-    public $trackCost = null;
-
     public function __construct(array $metadata)
     {
         $this->metadata = $metadata;
@@ -32,10 +23,8 @@ class Terrain extends Thing
         if(isset($this->metadata['team'])){
             return $this->metadata['team'];
         }
-        return Team::TEAM_NONE;
+        return GeneralInterface::NONE;
     }
-
-
 
     public function getPosition()
     {

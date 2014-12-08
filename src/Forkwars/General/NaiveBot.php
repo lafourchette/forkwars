@@ -17,9 +17,17 @@ class NaiveBot implements GeneralInterface
     {
         $factory = $world->find('factory');
         $headquarter = $world->find('headquarter');
-        $infantry = $factory->make('infantry');
-        $infantry->moveTo($headquarter);
-        $infantry->log('hello world');
+        $infantry = $world->find('infantry');
+        if(! $infantry){
+            $factory->make('infantry');
+            return;
+        }
+        if($infantry->getParent() != $headquarter){
+            $infantry->moveTo($headquarter);
+            return;
+        }
+
+        $infantry->log('Im at the headquarter');
         /*
         $opHQ = $world->find('Headquarter', Thing::TEAM_BLUE);
         if(! $opHQ){throw new \Exception('No headquarter found');}

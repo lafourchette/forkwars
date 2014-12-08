@@ -4,8 +4,7 @@ namespace Forkwars;
 
 use Forkwars\General\GeneralInterface;
 use Forkwars\WinCondition\WinConditionInterface;
-use Forkwars\World\Action;
-use Forkwars\World\Game\Record;
+use Forkwars\Game\Record;
 use Forkwars\World\World;
 
 /**
@@ -25,6 +24,8 @@ final class Game
 
     private $winCondition;
 
+    private $record;
+
     public function __construct(
         World $world,
         GeneralInterface $redGeneral,
@@ -35,6 +36,7 @@ final class Game
         $this->redGeneral   = $redGeneral;
         $this->blueGeneral  = $blueGeneral;
         $this->winCondition = $winCondition;
+        $this->record       = new Record();
     }
 
     /**
@@ -46,22 +48,22 @@ final class Game
     {
         while(
             ! $this->generalPlayAndWon($this->redGeneral)
-            &&
-            ! $this->generalPlayAndWon($this->blueGeneral)
+            //&&
+            //! $this->generalPlayAndWon($this->blueGeneral)
         ){
             // mh this looks dangerous
-            sleep(1);
-            echo 'arf';
+            usleep(100); echo '.';
         }
 
-        return $this->getTurns();
+        return $this->record;
     }
 
-    private $turns = array();
-
-    public function getTurns()
+    /**
+     * @return Record
+     */
+    public function getRecord()
     {
-        return $this->turns;
+        return $this->record;
     }
 
     public function generalPlayAndWon(GeneralInterface $general)
@@ -69,7 +71,7 @@ final class Game
         $this->world->startTurn($general);
         $general->doActions($this->world);
         $turn = $this->world->endTurn();
-        array_push($this->turns, $turn);
+        $this->record->addTurn($turn);
         return $this->winCondition->hasAWinner($this);
     }
 }

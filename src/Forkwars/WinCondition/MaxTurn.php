@@ -15,6 +15,6 @@ class MaxTurn implements WinConditionInterface
 
     public function hasAWinner(Game $game)
     {
-        return count($game->getTurns()) >= $this->maxTurn;
+        return $game->getRecord()->getTurnCount() >= $this->maxTurn;
     }
 } 

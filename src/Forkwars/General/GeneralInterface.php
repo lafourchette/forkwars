@@ -15,9 +15,11 @@ use Forkwars\World\World;
  */
 interface GeneralInterface
 {
+    const RED = 'red';
+    const BLUE= 'blue';
+    const NONE= 'none';
+
     /**
-     *
-     *
      * @param World $world
      * @return void
      */

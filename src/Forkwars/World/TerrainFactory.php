@@ -3,6 +3,7 @@
 namespace Forkwars\World;
 
 use Forkwars\Exception\TerrainException;
+use Forkwars\General\GeneralInterface;
 
 /**
  * Given a description file, makes a terrain given a code.
@@ -22,9 +23,9 @@ class TerrainFactory
         foreach ($description as $d) {
             $metadata = $d;
             $codes = array(
-                'code'      => Team::TEAM_NONE,
-                'blueCode'  => Team::TEAM_BLUE,
-                'redCode'   => Team::TEAM_RED
+                'code'      => GeneralInterface::NONE,
+                'blueCode'  => GeneralInterface::BLUE,
+                'redCode'   => GeneralInterface::RED
             );
             array_walk(array_keys($codes), function($c) use (&$metadata) {
                 unset($metadata[$c]); // remove metadata code references

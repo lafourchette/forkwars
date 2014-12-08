@@ -30,6 +30,6 @@ class TerrainFactoryTest extends \ProphecyTestCase
         $dut = new TerrainFactory(array(array('code' => 'a', 'redCode' => 'r')));
         $t = $dut->make('r');
         $this->assertInstanceOf('ForkWars\World\Terrain\Terrain', $t);
-        $this->assertSame(\Forkwars\World\Team::TEAM_RED, $t->getTeam());
+        $this->assertSame(\Forkwars\General\GeneralInterface::RED, $t->getTeam());
     }
 }

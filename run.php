@@ -22,15 +22,9 @@ $game = new Game(
     $world,
     new NaiveBot(),
     new InactiveBot(),
-    new \Forkwars\WinCondition\MaxTurn(1)
+    new \Forkwars\WinCondition\MaxTurn(5)
 );
 
-$turns = $game->run();
+$record = $game->run();
 
-foreach($turns as $turn){
-    echo 'startTurn' . PHP_EOL;
-    foreach($turn as $action){
-        echo "\t" . $action . PHP_EOL;
-    }
-    echo 'endTurn' . PHP_EOL;
-}
+echo $record->toString();
