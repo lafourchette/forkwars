@@ -17,7 +17,7 @@ class WorldFactoryTest extends \ProphecyTestCase
 
     public function testMake()
     {
-        $this->mockTerrainFactory->make('i')->willReturn(new \Forkwars\World\Thing());
+        $this->mockTerrainFactory->make('i')->willReturn(new \Forkwars\World\Terrain\Terrain(array()));
 
         $map = <<<EOF
 yeah

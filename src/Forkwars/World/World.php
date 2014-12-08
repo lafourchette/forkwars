@@ -2,16 +2,19 @@
 
 namespace Forkwars\World;
 
+use Forkwars\Exception\GameException;
+use Forkwars\World\Game\Turn;
 use Forkwars\World\Unit\Unit;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\Position;
 
 /**
- * Holds the world representation
+ * Holds the world representation, root node of the Scenegraph.
+ * Has a grid representation of the terrain map.
  *
  * @package Forkwars\World
  */
-class World
+class World extends Thing
 {
     private $name;
 
@@ -20,11 +23,9 @@ class World
     public $height;
 
     /**
-     * @var Position[]
+     * @var Terrain[]
      */
     private $grid = array();
-
-    private $unitList = array();
 
     /**
      * @param $name
@@ -34,30 +35,37 @@ class World
      */
     public function __construct($name, $width, $height)
     {
-        $this->name = $name;
-        $this->width= $width;
-        $this->height=$height;
-
-        // Creating the Position grid.
-        for ($x = 0; $x < $width; $x++) {
-            for ($y = 0; $y < $height; $y++) {
-                $pos = new Position($x, $y);
-                $this->grid[$this->pos($pos)] = $pos;
-            }
-        }
+        $this->name   = $name;
+        $this->width  = $width;
+        $this->height = $height;
     }
 
     /**
-     * Get a position on the grid
+     * Get a terrain on the grid
      *
-     * @param $x
-     * @param $y
-     * @return Position
+     * @param Position $position
+     * @return Terrain
      */
-    public function getPosition($x, $y)
+    public function getTerrainAt(Position $position)
     {
-        $i = $this->pos($x, $y);
+        $i = $this->pos($position);
         return $this->grid[$i];
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Store grid representation of terrains.
+     */
+    public function addChild(Thing $child)
+    {
+        if(! $child instanceof Terrain){
+            throw new \Exception('Cannot attach something else than Terrain to World');
+        }
+
+        //@todo
+
+        return parent::addChild($child);
     }
 
     // mixed can be a string, a class, a name... lot of things, terrain or unit
@@ -88,6 +96,12 @@ class World
         return false;
     }
 
+    /**
+     * Helper function to find direct neighboring positions, accounting for borders.
+     *
+     * @param Position $position
+     * @return Position[]
+     */
     public function getNeighboringPositions(Position $position)
     {
         $n = clone $position; $n->y--;
@@ -119,7 +133,48 @@ class World
         } elseif (is_null($y)) {
             throw new \Exception('Please set y');
         }
+        if($x < 0 || $x < $this->width ){
+            throw new \Exception('x is out of bounds');
+        }
+        if($y < 0 || $y < $this->height ){
+            throw new \Exception('y is out of bounds');
+        }
 
         return $x + $this->width * $y;
+    }
+
+    /**
+     * @var Turn
+     */
+    private $currentTurn = null;
+
+    public function startTurn()
+    {
+        if(! is_null($this->currentTurn)){
+            throw new GameException('Please first finish the current turn');
+        }
+        $this->currentTurn = new Turn();
+    }
+
+    public function endTurn()
+    {
+        $turn = $this->currentTurn;
+        $this->currentTurn = null;
+
+        return $turn;
+    }
+
+    /**
+     * @param Action $action
+     * @return $this|void
+     * @throws \Exception
+     */
+    public function registerAction(Action $action)
+    {
+        if(is_null($this->currentTurn)){
+            throw new GameException('Please start turn first');
+        }
+        $this->currentTurn->push($action);
+        return $this;
     }
 }

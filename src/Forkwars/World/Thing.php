@@ -15,6 +15,8 @@ class Thing
 
     private $parent = null;
 
+    private $position = null;
+
     /**
      * @param Thing $parent
      * @return $this
@@ -92,11 +94,29 @@ class Thing
 
     public function getPosition()
     {
-        throw new \Exception('This thing has no position');
+        if(is_null($this->position)){
+            throw new \Exception('This thing has no position');
+        }
+        return $this->position;
+    }
+
+    /**
+     * @param Position $position
+     * @return $this Fluent
+     */
+    public function setPosition(Position $position)
+    {
+        $this->position = $position;
+        return $this;
     }
 
     public function registerAction()
     {
         throw new \Exception('Cannot register action');
+    }
+
+    public function registerReference()
+    {
+        throw new \Exception('Cannot register reference');
     }
 }

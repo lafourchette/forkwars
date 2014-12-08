@@ -2,6 +2,7 @@
 
 namespace Forkwars\World\Terrain;
 
+use Forkwars\World\Action;
 use Forkwars\World\Team;
 use Forkwars\World\Thing;
 
@@ -54,5 +55,10 @@ class Terrain extends Thing
     private function hasMetadataAndTrue($name)
     {
         return isset($this->metadata[$name]) && $this->metadata[$name];
+    }
+
+    public function registerAction(Action $action)
+    {
+        return $this->getParent()->registerAction($action);
     }
 }
