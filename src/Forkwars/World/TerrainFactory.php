@@ -2,7 +2,6 @@
 
 namespace Forkwars\World;
 
-use Forkwars\World\Terrain\Terrain;
 use Forkwars\Exception\TerrainException;
 
 /**
@@ -46,7 +45,13 @@ class TerrainFactory
         if(! isset($this->codeMap[$code])) {
             throw new TerrainException('unknown terrain code ' . $code);
         }
+        $className = 'Forkwars\\World\\Terrain\\Terrain';
 
-        return new Terrain($this->codeMap[$code]);
+        // Ability to use other classes. Keeps the code isolated.
+        if(isset($this->codeMap[$code]['class'])){
+            $className = 'Forkwars\\World\\Terrain\\' . $this->codeMap[$code]['class'];
+            unset($this->codeMap[$code]['class']);
+        }
+        return new $className($this->codeMap[$code]);
     }
 }

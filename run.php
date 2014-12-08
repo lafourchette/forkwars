@@ -6,6 +6,7 @@ use Forkwars\Game;
 use Forkwars\World\WorldFactory;
 use Forkwars\World\TerrainFactory;
 use Forkwars\General\InactiveBot;
+use Forkwars\General\NaiveBot;
 
 // Init the factories
 $terrainFactory = new TerrainFactory(json_decode(
@@ -19,11 +20,17 @@ $world = $worldFactory->make(file_get_contents(__DIR__ . '/data/basic.map'));
 // New Game
 $game = new Game(
     $world,
-    new InactiveBot(),
+    new NaiveBot(),
     new InactiveBot(),
     new \Forkwars\WinCondition\MaxTurn(1)
 );
 
-$result = $game->run();
+$turns = $game->run();
 
-var_dump($result);
+foreach($turns as $turn){
+    echo 'startTurn' . PHP_EOL;
+    foreach($turn as $action){
+        echo "\t" . $action . PHP_EOL;
+    }
+    echo 'endTurn' . PHP_EOL;
+}

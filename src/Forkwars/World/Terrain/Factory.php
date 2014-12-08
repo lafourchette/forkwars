@@ -2,19 +2,21 @@
 
 namespace Forkwars\World\Terrain;
 
+use Forkwars\World\Action;
 use Forkwars\World\Unit\Unit;
 
-class Factory extends CapturableTerrain
+class Factory extends Terrain
 {
     /**
-     * @param $unitClass
+     * @param $something
+     * @return Unit
      */
-    public function spawn($unitClass)
+    public function make($something)
     {
-        $unit = $this->getTeam()->buy($unitClass);
-
-
-        $this->getWorld()->spawnUnit($this->getPosition(), $unit);
-        $unit->setTeam($this->getTeam());
+        $unit = new Unit();
+        $this->addChild($unit);
+        $this->registerReference($unit);
+        $this->registerAction(new Action($this, 'make', $something));
+        return $unit;
     }
 }

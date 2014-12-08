@@ -5,6 +5,7 @@ namespace Forkwars\World\Terrain;
 use Forkwars\World\Action;
 use Forkwars\World\Team;
 use Forkwars\World\Thing;
+use Forkwars\World\Unit\Unit;
 
 class Terrain extends Thing
 {
@@ -34,6 +35,8 @@ class Terrain extends Thing
         return Team::TEAM_NONE;
     }
 
+
+
     public function getPosition()
     {
         return $this->getParent()->getPosition();
@@ -57,8 +60,28 @@ class Terrain extends Thing
         return isset($this->metadata[$name]) && $this->metadata[$name];
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * Terrain delegates action registering to World.
+     */
     public function registerAction(Action $action)
     {
         return $this->getParent()->registerAction($action);
+    }
+
+    public function log($message)
+    {
+        $this->registerAction(new Action($this, 'log', $message));
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Terrain delegates referencing to World.
+     */
+    public function registerReference(Thing $thing)
+    {
+        return $this->getParent()->registerReference($thing);
     }
 }

@@ -40,6 +40,7 @@ class WorldFactory
                 $terrain = $this->terrainFactory->make($line[$x]);
                 $terrain->setPosition(new Position($x, $y));
                 $world->addChild($terrain);
+                $world->registerReference($terrain);
             }
         }
 

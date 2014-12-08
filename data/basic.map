@@ -1,10 +1,6 @@
 basic
-8x8
-iiiiiiii
-ixxxxxxi
-ixxxxxxi
-ixxxxxxi
-ixxxxxxi
-ixRFxxxi
-ixxxxxxi
-iiiiiiii
+4x4
+iiii
+ixxx
+ixFR
+xxxx

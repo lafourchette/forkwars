@@ -12,9 +12,20 @@ use Forkwars\World\Thing;
  */
 class Unit extends Thing
 {
+
+    public function getName()
+    {
+        return 'infantry';
+    }
+
     public function getPosition()
     {
         return $this->getParent()->getPosition();
+    }
+
+    public function log($message)
+    {
+        $this->registerAction(new Action($this, 'log', $message));
     }
 
     /**
@@ -34,5 +45,15 @@ class Unit extends Thing
             'moveTo',
             $destination
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Unit delegates action registering to parent.
+     */
+    public function registerAction(Action $action)
+    {
+        return $this->getParent()->registerAction($action);
     }
 }

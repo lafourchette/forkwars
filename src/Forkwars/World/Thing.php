@@ -17,6 +17,23 @@ class Thing
 
     private $position = null;
 
+    private $reference = null;
+
+    public function getName(){
+        throw new \Exception('please give it a name');
+    }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+        return $this;
+    }
+
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
     /**
      * @param Thing $parent
      * @return $this
@@ -110,12 +127,12 @@ class Thing
         return $this;
     }
 
-    public function registerAction()
+    public function registerAction(Action $action)
     {
         throw new \Exception('Cannot register action');
     }
 
-    public function registerReference()
+    public function registerReference(Thing $thing)
     {
         throw new \Exception('Cannot register reference');
     }

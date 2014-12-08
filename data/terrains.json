@@ -17,6 +17,7 @@
     {
         "name": "factory",
         "redCode": "F",
+        "class": "Factory",
         "defense": 3
     }
 ]

@@ -68,28 +68,12 @@ class World extends Thing
         return parent::addChild($child);
     }
 
-    // mixed can be a string, a class, a name... lot of things, terrain or unit
-    // we want to make it natural for a general to find its units
-    // team is a integer, 0 = red, 1 = blue
-    public function find($mixed, $team)
+    public function find($mixed)
     {
-        // find terrains
-        foreach($this->grid as $t)
+        foreach($this->getChildren() as $t)
         {
-            $className = get_class($t);
-            if (stripos($className, $mixed) !== false &&
-                $t->getTeam() == $team) {
+            if ($t->getName() == $mixed) {
                 return $t;
-            }
-        }
-
-        // find units
-        foreach($this->unitList as $u)
-        {
-            $className = get_class($u);
-            if (stripos($className, $mixed) !== false &&
-                $u->getTeam() == $team) {
-                return $u;
             }
         }
 
@@ -160,7 +144,6 @@ class World extends Thing
     {
         $turn = $this->currentTurn;
         $this->currentTurn = null;
-
         return $turn;
     }
 
@@ -174,7 +157,22 @@ class World extends Thing
         if(is_null($this->currentTurn)){
             throw new GameException('Please start turn first');
         }
-        $this->currentTurn->push($action);
+        $this->currentTurn->unshift($action->getDescription());
         return $this;
+    }
+
+    private $referenceCounter = 0;
+
+    private $referenceMap = array();
+
+    /**
+     * @param Action $action
+     * @return $this|void
+     * @throws \Exception
+     */
+    public function registerReference(Thing $thing)
+    {
+        $thing->setReference($thing->getName() . '_' . ++$this->referenceCounter);
+        array_push($this->referenceMap, $thing->getReference());
     }
 }
