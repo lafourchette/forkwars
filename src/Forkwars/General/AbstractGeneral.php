@@ -9,9 +9,9 @@ abstract class AbstractGeneral implements GeneralInterface
 {
     private $team;
 
-    public function __construct(Team $team)
+    public function __construct(/*Team $team*/)
     {
-        $this->team = $team;
+        //$this->team = $team;
     }
 
     public function getTeam()
@@ -20,5 +20,4 @@ abstract class AbstractGeneral implements GeneralInterface
     }
 
     abstract public function doActions(World $world);
-
 }

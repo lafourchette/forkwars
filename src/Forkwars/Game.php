@@ -44,27 +44,32 @@ final class Game
      */
     public function run()
     {
-        $record = new Record();
-
         while(
             ! $this->generalPlayAndWon($this->redGeneral)
             &&
             ! $this->generalPlayAndWon($this->blueGeneral)
-            &&
-            ! $record->reachedMaxLength()
-        ){}
+        ){
+            // mh this looks dangerous
+            sleep(1);
+            echo 'arf';
+        }
 
-        return $record;
+        return $this->getTurns();
+    }
+
+    private $turns = array();
+
+    public function getTurns()
+    {
+        return $this->turns;
     }
 
     public function generalPlayAndWon(GeneralInterface $general)
     {
-        $actions = array();
-        //$actions[] = $this->world->startTurn($general);
+        $this->world->startTurn($general);
         $general->doActions($this->world);
-        // $actions = $this->world->flushOrderList();
-        //$actions[] = $this->world->endTurn($general);
-        // $this->winCondition($this->world);
-        return true;
+        $turn = $this->world->endTurn();
+        array_push($this->turns, $turn);
+        return $this->winCondition->hasAWinner($this);
     }
 }

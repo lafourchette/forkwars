@@ -13,7 +13,7 @@ class Team
     private $bankAmount;
 
     private $priceCatalog;
-
+/*
     public function __construct(
         $startingBankAmount,
         $priceCatalog
@@ -21,7 +21,7 @@ class Team
         $this->bankAmount   = $startingBankAmount;
         $this->priceCatalog = $priceCatalog;
     }
-
+*/
     public function buy($unitClass)
     {
         if (! $this->canBuy($unitClass)) {

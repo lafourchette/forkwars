@@ -26,21 +26,6 @@ i
 EOF;
         $world = $this->dut->make($map);
         $this->assertInstanceOf('Forkwars\\World\\World', $world);
-    }
-
-    public function testMakeMissingName()
-    {
-        $world = <<<EOF
-1x1
-i
-EOF;
-    }
-
-    public function testMakeWrongSize()
-    {
-        $world = <<<EOF
-101
-i
-EOF;
+        $this->assertCount(1, $world->getChildren());
     }
 }

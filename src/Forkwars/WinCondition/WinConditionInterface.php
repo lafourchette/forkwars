@@ -2,7 +2,9 @@
 
 namespace Forkwars\WinCondition;
 
+use Forkwars\Game;
+
 interface WinConditionInterface
 {
-    public function hasAWinner();
+    public function hasAWinner(Game $game);
 } 
