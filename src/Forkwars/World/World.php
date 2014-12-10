@@ -172,6 +172,20 @@ class World extends Thing
 
     private $referenceMap = array();
 
+    public function toArray()
+    {
+        $buffer = array();
+        foreach($this->getChildren() as $t)
+        {
+            $buffer[] = array(
+                'code' => $t->getName(),
+                'ref'  => 't:' . $t->getReference(),
+                'position' => sprintf("%s,%s", $t->getPosition()->x, $t->getPosition()->y)
+            );
+        }
+        return $buffer;
+    }
+
     /**
      * @param Action $action
      * @return $this|void

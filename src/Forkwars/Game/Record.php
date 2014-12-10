@@ -3,14 +3,19 @@
 namespace Forkwars\Game;
 
 
+use Forkwars\World\World;
+
 class Record
 {
     private $turns;
 
     private $recorded;
 
-    public function __construct()
+    private $world;
+
+    public function __construct(World $world)
     {
+        $this->world = $world;
         $this->recorded = new \DateTime();
         $this->turns = new \SplStack();
     }
@@ -31,6 +36,15 @@ class Record
      */
     public function toJson()
     {
+        $buffer = array();
+        foreach($this->turns as $turn)
+        {
+            $buffer[] = $turn->toArray();
+        }
+        return json_encode(array(
+            'map'   => $this->world->toArray(),
+            'turns' => $buffer
+        ), JSON_PRETTY_PRINT);
     }
 
     /**

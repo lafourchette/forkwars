@@ -26,11 +26,6 @@ class Terrain extends Thing
         return GeneralInterface::NONE;
     }
 
-    public function getPosition()
-    {
-        return $this->getParent()->getPosition();
-    }
-
     public function canHeal()
     {
         return $this->hasMetadataAndTrue('healing');

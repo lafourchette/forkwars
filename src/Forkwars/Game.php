@@ -36,7 +36,7 @@ final class Game
         $this->redGeneral   = $redGeneral;
         $this->blueGeneral  = $blueGeneral;
         $this->winCondition = $winCondition;
-        $this->record       = new Record();
+        $this->record       = new Record($world);
     }
 
     /**
@@ -52,7 +52,6 @@ final class Game
             //! $this->generalPlayAndWon($this->blueGeneral)
         ){
             // mh this looks dangerous
-            usleep(100); echo '.';
         }
 
         return $this->record;
@@ -66,11 +65,14 @@ final class Game
         return $this->record;
     }
 
+    private $turnCount = 0;
+
     public function generalPlayAndWon(GeneralInterface $general)
     {
         $this->world->startTurn($general);
         $general->doActions($this->world);
         $turn = $this->world->endTurn();
+        $turn->setDay(++$this->turnCount);
         $this->record->addTurn($turn);
         return $this->winCondition->hasAWinner($this);
     }

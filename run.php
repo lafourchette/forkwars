@@ -8,6 +8,8 @@ use Forkwars\World\TerrainFactory;
 use Forkwars\General\InactiveBot;
 use Forkwars\General\NaiveBot;
 
+date_default_timezone_set('UTC');
+
 // Init the factories
 $terrainFactory = new TerrainFactory(json_decode(
     file_get_contents(__DIR__ . '/data/terrains.json'),true
@@ -22,9 +24,9 @@ $game = new Game(
     $world,
     new NaiveBot(),
     new InactiveBot(),
-    new \Forkwars\WinCondition\MaxTurn(5)
+    new \Forkwars\WinCondition\MaxTurn(3)
 );
 
 $record = $game->run();
 
-echo $record->toString();
+echo $record->toJson();
