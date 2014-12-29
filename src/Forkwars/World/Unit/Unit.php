@@ -34,6 +34,7 @@ class Unit extends Thing
      */
     public function moveTo(Thing $destination)
     {
+        $past = clone $this;
         $this->detach();
         $this->attachTo($destination);
 
@@ -41,7 +42,7 @@ class Unit extends Thing
         // @todo destination is Reachable ?
 
         $destination->registerAction(new Action(
-            $this,
+            $past,
             'moveTo',
             array(
                 'x' => $destination->getPosition()->x,

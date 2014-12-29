@@ -56,7 +56,7 @@
         });
     };
 
-    World.prototype.playAction = function(action)
+    World.prototype.doAction = function(action)
     {
         switch(action.what){
             case 'make':
@@ -74,7 +74,31 @@
                 sprite.position.y = (action.target.y+1)*16*scale;
                 break;
             default:
-                console.log(action);
+                break;
+        }
+
+        this.renderer.render(this.stage);
+    }
+
+    /**
+     * Undo an action
+     * @param action
+     */
+    World.prototype.undoAction = function(action)
+    {
+        switch(action.what){
+            case 'make':
+                var sprite = this.referencesMap[action.target.reference];
+                this.stage.removeChild(sprite);
+                this.referencesMap[action.target.reference] = null;
+                // @todo my javascript is rusty, how do you clean that reference ?
+                break;
+            case 'moveTo':
+                var sprite = this.referencesMap[action.who.reference];
+                sprite.position.x = (action.who.x+1)*16*scale;
+                sprite.position.y = (action.who.y+1)*16*scale;
+                break;
+            default:
                 break;
         }
 

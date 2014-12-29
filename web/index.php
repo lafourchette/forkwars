@@ -63,23 +63,44 @@ $record = $game->run();
             var record = <?php echo $record->toJson(); ?>;
             var world = new World(1, 2);
 
+            var currentIndex = 0; // current index is already played
+            function playRecord(index) {
+                if(index == currentIndex){
+                    return;
+                }
+                if(index > currentIndex){
+                    // forward
+                    for(var i = ++currentIndex; i <= index; i++){
+                        world.doAction(actionList[i]);
+                    }
+                } else {
+                    // backward
+                    for(var i = currentIndex; i > index; i--){
+                        world.undoAction(actionList[i]);
+                    }
+                }
+                currentIndex = index;
+            }
+
             // Create a list of actions with references
             var actionList = [];
             record.turns.forEach(function(turn){
                 turn.actions.forEach(function(action){
                     actionList.push(action);
-                    var currentIndex = actionList.length - 1;
-                    var liItem = $('<tr><td>'+(currentIndex+1)+'</td><td>'+action.summary+'</td></tr>')
+                    var idx = actionList.length - 1;
+                    var liItem = $('<tr><td>'+(idx)+'</td><td>'+action.summary+'</td></tr>')
                     $('.actionList').append(liItem);
 
                     liItem.click(function(){
-                        world.playAction(actionList[currentIndex]);
+                        $('.actionList').find('tr').removeClass('active');
+                        playRecord(idx);
+                        liItem.addClass('active');
                     });
                 });
             });
 
             world.init($('.map')[0], record.map, function(world){
-                world.playAction(record.turns[0].actions[0]);
+                world.doAction(record.turns[0].actions[0]);
             });
 
         })(document.World, jQuery);
