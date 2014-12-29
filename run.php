@@ -28,5 +28,27 @@ $game = new Game(
 );
 
 $record = $game->run();
+?>
+<html>
+<head>
+    <title>Forkwars viewer</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <h1>Game viewer</h1>
+    <!-- scripts -->
+    <script type="text/javascript" src="/pixi.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <script type="text/javascript">
+        (function(World){
+            var record = <?php echo $record->toJson(); ?>;
+            var world = new World(1, 2);
+            world.init(document.body, record.map, []);
+            var turn = record.turns[0];
+            var action = turn.actions[0];
+            console.log(action);
+        })(document.World);
+    </script>
+</body>
+</html>
 
-echo $record->toJson();

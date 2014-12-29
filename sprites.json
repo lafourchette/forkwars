@@ -16,7 +16,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "b.png":
+        "headquarter":
         {
             "frame": {"x":474,"y":82,"w":20,"h":31},
             "rotated": false,
@@ -40,7 +40,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "f.png":
+        "factory":
         {
             "frame": {"x":388,"y":122,"w":16,"h":16},
             "rotated": false,

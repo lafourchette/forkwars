@@ -180,7 +180,8 @@ class World extends Thing
             $buffer[] = array(
                 'code' => $t->getName(),
                 'ref'  => 't:' . $t->getReference(),
-                'position' => sprintf("%s,%s", $t->getPosition()->x, $t->getPosition()->y)
+                'x' => $t->getPosition()->x,
+                'y' => $t->getPosition()->y
             );
         }
         return $buffer;

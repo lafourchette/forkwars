@@ -44,7 +44,7 @@ class Record
         return json_encode(array(
             'map'   => $this->world->toArray(),
             'turns' => $buffer
-        ), JSON_PRETTY_PRINT);
+        )/*,JSON_PRETTY_PRINT*/);
     }
 
     /**
