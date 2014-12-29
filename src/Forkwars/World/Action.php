@@ -9,12 +9,21 @@ class Action
 {
     private $description;
 
+    private $stringDescription;
+
     public function __construct(Thing $who, $what, $mixed)
     {
+        $this->stringDescription = sprintf('%s %s %s',
+            $who->getReference(),
+            $what,
+            $mixed instanceof Thing ? $this->formatThing($mixed) : var_export($mixed, true)
+        );
+
         $this->description = array(
             'what' => $what,
             'who'  => $this->formatThing($who),
-            'target' => $mixed instanceof Thing ? $this->formatThing($mixed) : $mixed
+            'target' => $mixed instanceof Thing ? $this->formatThing($mixed) : $mixed,
+            'summary' => $this->stringDescription
         );
     }
 
@@ -31,5 +40,10 @@ class Action
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function __toString()
+    {
+        return $this->stringDescription;
     }
 }
