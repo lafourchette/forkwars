@@ -17,7 +17,7 @@ $terrainFactory = new TerrainFactory(json_decode(
 $worldFactory = new WorldFactory($terrainFactory);
 
 // Create world
-$world = $worldFactory->make(file_get_contents(__DIR__ . '/../data/basic.map'));
+$world = $worldFactory->make(file_get_contents(__DIR__ . '/../data/island.map'));
 
 // New Game
 $game = new Game(
@@ -61,7 +61,7 @@ $record = $game->run();
     <script type="text/javascript">
         (function(World, $){
             var record = <?php echo $record->toJson(); ?>;
-            var world = new World(1, 2);
+            var world = new World(11, 8);
 
             var currentIndex = 0; // current index is already played
             function playRecord(index) {

@@ -1,6 +1,6 @@
 {"frames": 
     {
-        "i.png":
+        "water":
         {
             "frame": {"x":414,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -8,7 +8,15 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "x.png":
+        "land":
+        {
+            "frame": {"x":440,"y":307,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "bridge":
         {
             "frame": {"x":440,"y":307,"w":16,"h":16},
             "rotated": false,

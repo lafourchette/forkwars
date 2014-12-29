@@ -4,7 +4,7 @@
     // Gives the general world scale
     var scale = 2;
 
-    var World = function(height, width){
+    var World = function(width, height){
         this.height = height;
         this.width  = width;
 

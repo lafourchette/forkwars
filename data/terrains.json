@@ -5,6 +5,11 @@
         "defense": 1
     },
     {
+        "name": "bridge",
+        "code": "b",
+        "defense": 1
+    },
+    {
         "name": "water",
         "code": "i",
         "defense": 1
