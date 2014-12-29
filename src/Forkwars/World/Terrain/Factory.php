@@ -13,10 +13,10 @@ class Factory extends Terrain
      */
     public function make($something)
     {
-        $unit = new Unit();
+        $unit = new Unit(); // always infantry haha
         $this->addChild($unit);
         $this->registerReference($unit);
-        $this->registerAction(new Action($this, 'make', $something));
+        $this->registerAction(new Action($this, 'make', $unit));
         return $unit;
     }
 }

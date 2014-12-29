@@ -10,12 +10,13 @@
 
         // texture cache
         this.texturesTerrains = new Array();
+        // references
+        this.referencesMap =  new Array();
     }
 
-    World.prototype.init = function(element, terrainMap, unitList)
+    World.prototype.init = function(element, terrainMap, callback)
     {
         this.terrainMap = terrainMap;
-        this.unitList = unitList;
 
         // Init PIXI stage
         this.stage = new PIXI.Stage(0x97c56e, true);
@@ -29,22 +30,60 @@
 
         // Load textures
         loader = new PIXI.AssetLoader([ "sprites.json" ]);
-        loader.onComplete = function(){that.onAssetLoaded()};
+        loader.onComplete = function(){
+            that.onAssetLoaded();
+            callback(that);
+            that.renderer.render(that.stage);
+        };
         loader.load();
     };
 
+    /**
+     * Load textures and create map
+     */
     World.prototype.onAssetLoaded = function(){
         var that = this;
         this.terrainMap.forEach(function(t){
-            that.createTerrain(t.code, t.x, t.y);
-        });
-        requestAnimFrame( function(){
-            that.renderer.render(that.stage);
+            var terrain = that.makeSprite(t.code, t.x, t.y);
+            that.stage.addChild(terrain);
+
+            /*
+            terrain.setInteractive(true);
+            terrain.click = terrain.clap = function(data){
+                console.log(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
+            }
+            */
         });
     };
 
-    World.prototype.createTerrain = function(code, x, y) {
+    World.prototype.playAction = function(action)
+    {
+        switch(action.what){
+            case 'make':
+                var sprite = this.makeSprite(
+                    action.target.code,
+                    action.who.x,
+                    action.who.y
+                );
+                this.referencesMap[action.target.reference] = sprite;
+                this.stage.addChild(sprite);
+                break;
+            case 'moveTo':
+                var sprite = this.referencesMap[action.who.reference];
+                sprite.position.x = (action.target.x+1)*16*scale;
+                sprite.position.y = (action.target.y+1)*16*scale;
+                break;
+            default:
+                console.log(action);
+                break;
+        }
+
+        this.renderer.render(this.stage);
+    }
+
+    World.prototype.makeSprite = function(code, x, y) {
         if(! code){
+            console.error('no code provided');
             return;
         }
 
@@ -60,15 +99,8 @@
         terrain.position.x = (x+1)*16*scale;
         terrain.position.y = (y+1)*16*scale;
 
-        /*
-        terrain.setInteractive(true);
-        terrain.click = terrain.clap = function(data){
-            console.log(data+" type="+iconeTerrain+" x:"+x+" y:"+y+" width:"+terrain.width+" height:"+terrain.height);
-        }
-        */
+        return terrain
 
-        // add it to the stage
-        this.stage.addChild(terrain);
     };
 
     document.World = World;

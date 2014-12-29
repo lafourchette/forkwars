@@ -43,7 +43,11 @@ class Unit extends Thing
         $destination->registerAction(new Action(
             $this,
             'moveTo',
-            $destination
+            array(
+                'x' => $destination->getPosition()->x,
+                'y' => $destination->getPosition()->y
+            )
+
         ));
     }
 

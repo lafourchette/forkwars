@@ -43,10 +43,10 @@ $record = $game->run();
         (function(World){
             var record = <?php echo $record->toJson(); ?>;
             var world = new World(1, 2);
-            world.init(document.body, record.map, []);
-            var turn = record.turns[0];
-            var action = turn.actions[0];
-            console.log(action);
+            world.init(document.body, record.map, function(world){
+                world.playAction(record.turns[0].actions[0]);
+                world.playAction(record.turns[1].actions[0]);
+            });
         })(document.World);
     </script>
 </body>

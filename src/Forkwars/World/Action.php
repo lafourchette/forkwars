@@ -11,14 +11,21 @@ class Action
 
     public function __construct(Thing $who, $what, $mixed)
     {
-        if($mixed instanceof Thing){
-            $mixed = 't:' . $mixed->getReference();
-        }
-        $this->description = sprintf('t:%s %s %s',
-            $who->getReference(),
-            $what,
-            $mixed
+        $this->description = array(
+            'what' => $what,
+            'who'  => $this->formatThing($who),
+            'target' => $mixed instanceof Thing ? $this->formatThing($mixed) : $mixed
         );
+    }
+
+    private function formatThing(Thing $thing)
+    {
+        return array(
+                'reference' => 't:' . $thing->getReference(),
+                'x' => $thing->getPosition()->x,
+                'y' => $thing->getPosition()->y,
+                'code' => $thing->getName()
+            );
     }
 
     public function getDescription()
