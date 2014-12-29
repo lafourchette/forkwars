@@ -19,6 +19,8 @@ class Thing
 
     private $reference = null;
 
+    private $team = null;
+
     public function getName(){
         throw new \Exception('please give it a name');
     }
@@ -32,6 +34,22 @@ class Thing
     public function getReference()
     {
         return $this->reference;
+    }
+
+    /**
+     * @param null $team
+     */
+    public function setTeam(Team $team)
+    {
+        $this->team = $team;
+    }
+
+    /**
+     * @return null
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 
     /**

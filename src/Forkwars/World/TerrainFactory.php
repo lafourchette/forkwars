@@ -23,9 +23,9 @@ class TerrainFactory
         foreach ($description as $d) {
             $metadata = $d;
             $codes = array(
-                'code'      => GeneralInterface::NONE,
-                'blueCode'  => GeneralInterface::BLUE,
-                'redCode'   => GeneralInterface::RED
+                'code'      => Team::TEAM_NONE,
+                'blueCode'  => Team::TEAM_BLUE,
+                'redCode'   => Team::TEAM_RED
             );
             array_walk(array_keys($codes), function($c) use (&$metadata) {
                 unset($metadata[$c]); // remove metadata code references
@@ -41,6 +41,21 @@ class TerrainFactory
         }
     }
 
+    private $availableTeams = array();
+
+    public function setAvailableTeams(array $teams)
+    {
+        $this->availableTeams = $teams;
+    }
+
+    private function getTeam($teamConstant)
+    {
+        if(! isset($this->availableTeams[$teamConstant])){
+            throw new TerrainException('cannot find a team for ' . $teamConstant);
+        }
+        return  $this->availableTeams[$teamConstant];
+    }
+
     public function make($code)
     {
         if(! isset($this->codeMap[$code])) {
@@ -53,6 +68,12 @@ class TerrainFactory
             $className = 'Forkwars\\World\\Terrain\\' . $this->codeMap[$code]['class'];
             unset($this->codeMap[$code]['class']);
         }
-        return new $className($this->codeMap[$code]);
+
+        $terrain = new $className($this->codeMap[$code]);
+
+        if(isset($this->codeMap[$code]['team'])){
+            $terrain->setTeam($this->getTeam($this->codeMap[$code]['team']));
+        }
+        return $terrain;
     }
 }

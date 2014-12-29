@@ -1,14 +1,13 @@
 <?php
 
+//@todo should be elsewhere, thats game logic
 namespace Forkwars\World;
-
-use Forkwars\World\Unit\Unit;
 
 class Team
 {
-    const TEAM_RED  = 'red';
-    const TEAM_BLUE = 'blue';
     const TEAM_NONE = 0;
+    const TEAM_RED  = 1;
+    const TEAM_BLUE = 2;
 
     private $bankAmount;
 

@@ -18,14 +18,6 @@ class Terrain extends Thing
         return $this->returnMandatoryMetadata('name');
     }
 
-    public function getTeam()
-    {
-        if(isset($this->metadata['team'])){
-            return $this->metadata['team'];
-        }
-        return GeneralInterface::NONE;
-    }
-
     public function canHeal()
     {
         return $this->hasMetadataAndTrue('healing');

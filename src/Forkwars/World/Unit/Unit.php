@@ -12,7 +12,6 @@ use Forkwars\World\Thing;
  */
 class Unit extends Thing
 {
-
     public function getName()
     {
         return 'infantry';
