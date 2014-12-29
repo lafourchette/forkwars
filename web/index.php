@@ -24,7 +24,10 @@ $game = new Game(
     $world,
     new NaiveBot(),
     new InactiveBot(),
-    new \Forkwars\WinCondition\MaxTurn(3)
+    new \Forkwars\WinCondition\MultiCondition(
+        new \Forkwars\WinCondition\MaxTurn(5),
+        new \Forkwars\WinCondition\HeadquarterCaptured()
+    )
 );
 
 $record = $game->run();

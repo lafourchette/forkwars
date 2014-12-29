@@ -65,6 +65,11 @@ final class Game
         return $this->record;
     }
 
+    public function getWorld()
+    {
+        return $this->world;
+    }
+
     private $turnCount = 0;
 
     public function generalPlayAndWon(GeneralInterface $general)

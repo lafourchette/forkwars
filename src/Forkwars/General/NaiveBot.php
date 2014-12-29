@@ -15,9 +15,9 @@ class NaiveBot implements GeneralInterface
 {
     public function doActions(World $world)
     {
-        $factory = $world->find('factory');
-        $headquarter = $world->find('headquarter');
-        $infantry = $world->find('infantry');
+        $factory     = $world->findOne('factory');
+        $headquarter = $world->findOne('headquarter');
+        $infantry    = $world->findOne('infantry');
         if(! $infantry){
             $factory->make('infantry');
             return;
@@ -26,22 +26,9 @@ class NaiveBot implements GeneralInterface
             $infantry->moveTo($headquarter);
             return;
         }
-
-        $infantry->log('Im at the headquarter');
-        /*
-        $opHQ = $world->find('Headquarter', Thing::TEAM_BLUE);
-        if(! $opHQ){throw new \Exception('No headquarter found');}
-        if ($infantry) {
-            if ($infantry->isAt($opHQ)) {
-                $infantry->capture();
-            } else {
-                $infantry->moveToward($opHQ);
-            }
-        } else {
-            $factory = $world->find('Factory', Thing::TEAM_RED);
-            if(! $factory){throw new \Exception('No factory found');}
-            $factory->spawn(new Infantry());
+        else{
+            $infantry->capture();
+            return;
         }
-        */
     }
 }

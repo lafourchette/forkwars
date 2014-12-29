@@ -7,6 +7,8 @@ use Forkwars\World\Action;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\World\Thing;
 
+use Forkwars\World\Terrain\CapturableTerrain;
+
 /**
  * Something that can move. Always part of a team.
  */
@@ -15,6 +17,11 @@ class Unit extends Thing
     public function getName()
     {
         return 'infantry';
+    }
+
+    public function getHealth()
+    {
+        return 10;
     }
 
     public function getPosition()
@@ -47,8 +54,50 @@ class Unit extends Thing
                 'x' => $destination->getPosition()->x,
                 'y' => $destination->getPosition()->y
             )
-
         ));
+
+        if($this->getParent() instanceof CapturableTerrain){
+            $this->getParent()->resetCapture();
+        }
+    }
+
+    /**
+     * Capture the building where it stands
+     * @todo the capture logic is here, maybe it is not the best place for it.
+     */
+    public function capture()
+    {
+        $success = false;
+        /**
+         * @var CapturableTerrain $parent
+         */
+        $parent  = $this->getParent();
+        $captureLeft = $parent->capture(
+            $this->getHealth()
+        );
+        $parent->registerAction(new Action(
+            $this,
+            'capture',
+            $parent
+        ));
+        if ($captureLeft <= 0) {
+            $parent->setTeam(
+                $this->getTeam()
+            );
+            $parent->resetCapture();
+            $parent->registerAction(new Action(
+                $this,
+                'log',
+                'I captured my parent'
+            ));
+            $success = true;
+        }
+        return $success;
+    }
+
+    public function canCapture()
+    {
+        // return $unit->getTeam() != $this->getTeam();
     }
 
     /**

@@ -15,6 +15,7 @@ class Factory extends Terrain
     {
         $unit = new Unit(); // always infantry haha
         $this->addChild($unit);
+        $unit->setTeam($this->getTeam());
         $this->registerReference($unit);
         $this->registerAction(new Action($this, 'make', $unit));
         return $unit;

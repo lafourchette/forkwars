@@ -68,23 +68,57 @@ class World extends Thing
         return parent::addChild($child);
     }
 
+    /**
+     * @param $mixed
+     * @return false|Thing
+     */
+    public function findOne($mixed)
+    {
+        $results = $this->find($mixed);
+        return count($results) == 0 ? false : array_shift($results);
+    }
+
+    /**
+     * @param $mixed
+     * @return Thing[]
+     */
     public function find($mixed)
     {
+        $results = array();
         foreach($this->getChildren() as $t)
         {
             if ($t->getName() == $mixed) {
-                return $t;
+                array_push($results, $t);
             }
 
             foreach($t->getChildren() as $t2)
             {
                 if ($t2->getName() == $mixed) {
-                    return $t2;
+                    array_push($results, $t2);
                 }
             }
         }
+        return $results;
+    }
 
-        return false;
+    private $availableTeams = array();
+
+    public function setAvailableTeams(array $teams)
+    {
+        $this->availableTeams = $teams;
+    }
+
+    public function getTeamCount()
+    {
+        return count($this->availableTeams);
+    }
+
+    public function getTeamByConstant($teamConstant)
+    {
+        if(! isset($this->availableTeams[$teamConstant])){
+            throw new \Exception('cannot find a team for ' . $teamConstant);
+        }
+        return  $this->availableTeams[$teamConstant];
     }
 
     /**
