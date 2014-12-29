@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Forkwars\Game;
 use Forkwars\World\WorldFactory;
@@ -12,12 +12,12 @@ date_default_timezone_set('UTC');
 
 // Init the factories
 $terrainFactory = new TerrainFactory(json_decode(
-    file_get_contents(__DIR__ . '/data/terrains.json'),true
+    file_get_contents(__DIR__ . '/../data/terrains.json'),true
 ));
 $worldFactory = new WorldFactory($terrainFactory);
 
 // Create world
-$world = $worldFactory->make(file_get_contents(__DIR__ . '/data/basic.map'));
+$world = $worldFactory->make(file_get_contents(__DIR__ . '/../data/basic.map'));
 
 // New Game
 $game = new Game(
@@ -32,7 +32,6 @@ $record = $game->run();
 <html>
 <head>
     <title>Forkwars viewer</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <style>
         .actionList {
@@ -55,10 +54,10 @@ $record = $game->run();
     </div>
 
     <!-- scripts -->
-    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/pixi.js"></script>
-    <script type="text/javascript" src="/main.js"></script>
+    <script type="text/javascript" src="/js/pixi.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript">
         (function(World, $){
             var record = <?php echo $record->toJson(); ?>;

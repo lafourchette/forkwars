@@ -85,7 +85,7 @@
     "meta": {
         "app": "LaFourchetteForkwars",
         "version": "1.0",
-        "image": "data/sprites.png",
+        "image": "sprites.png",
         "format": "RGBA8888",
         "size": {"w":705,"h":384},
         "scale": "1"

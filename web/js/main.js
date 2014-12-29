@@ -29,7 +29,7 @@
         });
 
         // Load textures
-        loader = new PIXI.AssetLoader([ "sprites.json" ]);
+        loader = new PIXI.AssetLoader([ "/img/sprites.json" ]);
         loader.onComplete = function(){
             that.onAssetLoaded();
             callback(that);
