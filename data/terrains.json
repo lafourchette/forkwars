@@ -16,7 +16,9 @@
     },
     {
         "name": "headquarter",
+        "class": "CapturableTerrain",
         "redCode": "R",
+        "blueCode": "B",
         "defense": 3
     },
     {
