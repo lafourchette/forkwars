@@ -1,0 +1,30 @@
+[
+    {
+        "name": "land",
+        "code": "x",
+        "defense": 1
+    },
+    {
+        "name": "bridge",
+        "code": "b",
+        "defense": 1
+    },
+    {
+        "name": "water",
+        "code": "i",
+        "defense": 1
+    },
+    {
+        "name": "headquarter",
+        "class": "CapturableTerrain",
+        "redCode": "R",
+        "blueCode": "B",
+        "defense": 3
+    },
+    {
+        "name": "factory",
+        "redCode": "F",
+        "class": "Factory",
+        "defense": 3
+    }
+]

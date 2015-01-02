@@ -1,6 +1,6 @@
 {"frames": 
     {
-        "i.png":
+        "water":
         {
             "frame": {"x":414,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -8,7 +8,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "x.png":
+        "land":
         {
             "frame": {"x":440,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -16,7 +16,15 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "b.png":
+        "bridge":
+        {
+            "frame": {"x":440,"y":307,"w":16,"h":16},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+            "sourceSize": {"w":16,"h":16}
+        },
+        "headquarter":
         {
             "frame": {"x":474,"y":82,"w":20,"h":31},
             "rotated": false,
@@ -40,7 +48,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "f.png":
+        "factory":
         {
             "frame": {"x":388,"y":122,"w":16,"h":16},
             "rotated": false,
@@ -72,7 +80,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":20},
             "sourceSize": {"w":16,"h":20}
         },
-        "infantry.png":
+        "infantry":
         {
             "frame": {"x":17,"y":114,"w":16,"h":16},
             "rotated": false,
@@ -85,7 +93,7 @@
     "meta": {
         "app": "LaFourchetteForkwars",
         "version": "1.0",
-        "image": "data/sprites.png",
+        "image": "sprites.png",
         "format": "RGBA8888",
         "size": {"w":705,"h":384},
         "scale": "1"

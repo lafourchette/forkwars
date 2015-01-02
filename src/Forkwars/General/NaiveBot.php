@@ -13,21 +13,22 @@ use Forkwars\World\Thing;
  */
 class NaiveBot implements GeneralInterface
 {
-    public function giveOrders(World $world)
+    public function doActions(World $world)
     {
-        $infantry = $world->find('Infantry', Thing::TEAM_RED);
-        $opHQ = $world->find('Headquarter', Thing::TEAM_BLUE);
-        if(! $opHQ){throw new \Exception('No headquarter found');}
-        if ($infantry) {
-            if ($infantry->isAt($opHQ)) {
-                $infantry->capture();
-            } else {
-                $infantry->moveToward($opHQ);
-            }
-        } else {
-            $factory = $world->find('Factory', Thing::TEAM_RED);
-            if(! $factory){throw new \Exception('No factory found');}
-            $factory->spawn(new Infantry());
+        $factory     = $world->findOne('factory');
+        $headquarter = $world->findOne('headquarter');
+        $infantry    = $world->findOne('infantry');
+        if(! $infantry){
+            $factory->make('infantry');
+            return;
+        }
+        if($infantry->getParent() != $headquarter){
+            $infantry->moveTo($headquarter);
+            return;
+        }
+        else{
+            $infantry->capture();
+            return;
         }
     }
 }

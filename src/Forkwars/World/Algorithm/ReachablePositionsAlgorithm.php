@@ -32,7 +32,7 @@ class ReachablePositionsAlgorithm
     public function compute(Unit $unit)
     {
         $this->world = $unit->getWorld();
-        $current = $unit->getWorldPosition();
+        $current = $unit->getPosition();
 
         // init the algorithm
         $this->visited = array();

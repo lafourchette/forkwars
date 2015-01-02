@@ -2,54 +2,78 @@
 
 namespace Forkwars\World;
 
-use Forkwars\World\Terrain\City;
-use Forkwars\World\Terrain\Factory;
-use Forkwars\World\Terrain\Headquarter;
-use Forkwars\World\Terrain\Land;
-use Forkwars\World\Terrain\Terrain;
-use Forkwars\World\Terrain\Water;
-use Forkwars\World\Unit\Unit;
+use Forkwars\Exception\TerrainException;
+use Forkwars\General\GeneralInterface;
 
+/**
+ * Given a description file, makes a terrain given a code.
+ */
 class TerrainFactory
 {
-    public function make($code, World $world)
+    private $codeMap;
+
+    /**
+     * @todo make description an array of objects
+     * @todo this ctor is really complicated to understand
+     * @param array $description
+     */
+    public function __construct(array $description)
     {
-        $t = null;
-        switch ($code) {
-            case 'x':
-                $t = new Land();
-                break;
-            case 'i':
-                $t = new Water();
-                break;
-            case 'R':
-            case 'b':
-                $t = new Headquarter();
-                $t->setTeam($code == 'R' ? Unit::TEAM_RED : Unit::TEAM_BLUE);
-                break;
-            case 'F':
-            case 'f':
-            case 'a': // neutral
-                $t = new Factory();
-                $t->setTeam($code == 'F' ? Unit::TEAM_RED : Unit::TEAM_BLUE);
-                break;
-            case 'C':
-            case 'c':
-            case 'i': // neutral
-                $t = new City();
-            default:
-                throw new \Exception('unknown code');
-                break;
+        // compute a reverse mapping, along with variations.
+        foreach ($description as $d) {
+            $metadata = $d;
+            $codes = array(
+                'code'      => Team::TEAM_NONE,
+                'blueCode'  => Team::TEAM_BLUE,
+                'redCode'   => Team::TEAM_RED
+            );
+            array_walk(array_keys($codes), function($c) use (&$metadata) {
+                unset($metadata[$c]); // remove metadata code references
+            });
+            // Map each code to a possible team
+            foreach ($codes as $n => $v) {
+                if(isset($d[$n])){
+                    $code = $d[$n];
+                    $this->codeMap[$code] = $metadata;
+                    $this->codeMap[$code]['team'] = $v;
+                }
+            }
         }
-
-        $t->setCode($code);
-        $t->setWorld($world);
-
-        return $t;
     }
 
-    public function recycle(Terrain $terrain)
-    {
+    private $availableTeams = array();
 
+    public function setAvailableTeams(array $teams)
+    {
+        $this->availableTeams = $teams;
+    }
+
+    private function getTeam($teamConstant)
+    {
+        if(! isset($this->availableTeams[$teamConstant])){
+            throw new TerrainException('cannot find a team for ' . $teamConstant);
+        }
+        return  $this->availableTeams[$teamConstant];
+    }
+
+    public function make($code)
+    {
+        if(! isset($this->codeMap[$code])) {
+            throw new TerrainException('unknown terrain code ' . $code);
+        }
+        $className = 'Forkwars\\World\\Terrain\\Terrain';
+
+        // Ability to use other classes. Keeps the code isolated.
+        if(isset($this->codeMap[$code]['class'])){
+            $className = 'Forkwars\\World\\Terrain\\' . $this->codeMap[$code]['class'];
+            unset($this->codeMap[$code]['class']);
+        }
+
+        $terrain = new $className($this->codeMap[$code]);
+
+        if(isset($this->codeMap[$code]['team'])){
+            $terrain->setTeam($this->getTeam($this->codeMap[$code]['team']));
+        }
+        return $terrain;
     }
 }

@@ -2,7 +2,10 @@
 
 namespace Forkwars;
 
-class Position
+/**
+ * A two dimensional vector for locating Things on a World.
+ */
+class Position implements SerializableInterface
 {
     public $x, $y;
 
@@ -17,7 +20,26 @@ class Position
         return ($this->x == $p->x) && ($this->y == $p->y);
     }
 
-    public function __toString()
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return array('x' => $this->x, 'y' => $this->y);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize(array $data)
+    {
+        return new self($data['x'], $data['y']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSummary()
     {
         return $this->x.'-'.$this->y;
     }

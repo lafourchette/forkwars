@@ -13,8 +13,15 @@ use Forkwars\World\World;
  * special powers.
  *
  */
-
 interface GeneralInterface
 {
-    public function giveOrders(World $world);
+    const RED = 'red';
+    const BLUE= 'blue';
+    const NONE= 'none';
+
+    /**
+     * @param World $world
+     * @return void
+     */
+    public function doActions(World $world);
 }
