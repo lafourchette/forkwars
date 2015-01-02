@@ -24,13 +24,19 @@ $game = new Game(
     $world,
     new NaiveBot(),
     new InactiveBot(),
+    new \Forkwars\WinCondition\MaxTurn(4)
+    /*
     new \Forkwars\WinCondition\MultiCondition(
         new \Forkwars\WinCondition\MaxTurn(5),
         new \Forkwars\WinCondition\HeadquarterCaptured()
-    )
+    )*/
 );
 
 $record = $game->run();
+if(php_sapi_name() === 'cli'){
+    echo $record->toJson(JSON_PRETTY_PRINT);
+    die;
+}
 ?>
 <html>
 <head>

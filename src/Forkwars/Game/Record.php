@@ -34,7 +34,7 @@ class Record
     /**
      * Ok for using in viewer
      */
-    public function toJson()
+    public function toJson($jsonFlags = null)
     {
         $buffer = array();
         foreach($this->turns as $turn)
@@ -44,7 +44,7 @@ class Record
         return json_encode(array(
             'map'   => $this->world->toArray(),
             'turns' => $buffer
-        )/*,JSON_PRETTY_PRINT*/);
+        ), $jsonFlags);
     }
 
     /**

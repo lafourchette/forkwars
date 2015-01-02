@@ -18,7 +18,6 @@ class HeadquarterCaptured implements WinConditionInterface
                 array_push($teams, $hq->getTeam());
             }
         }
-        var_dump(count($teams), $game->getWorld()->getTeamCount());
         if(count($teams) != ($game->getWorld()->getTeamCount() - 1)){
             $win = true;
         }

@@ -17,7 +17,11 @@ class Turn extends \SplStack
     {
         return array(
             'day' => $this->day,
-            'actions' => iterator_to_array($this)
+            'actions' =>
+                // @todo not ok
+                array_values(
+                    iterator_to_array($this)
+                )
         );
     }
 }
