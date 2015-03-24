@@ -12,10 +12,6 @@ use Forkwars\World\World;
  */
 final class Game
 {
-    const TEAM_BLUE = 'blue';
-    const TEAM_RED  = 'red';
-    const TEAM_NONE = 'none';
-
     private $world;
 
     private $redGeneral;

@@ -16,10 +16,9 @@ class ReachablePositionsAlgorithmTest extends \ProphecyTestCase
 
     public function setUp()
     {
-
         parent::setUp();
 
-        $this->markTestSkipped('please work on refacto');
+        $this->markTestSkipped('please work on this after refactoring');
 
         $this->unit = new Unit();
         $this->unit->moveCount = 1;
