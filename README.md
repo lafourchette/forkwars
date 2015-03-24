@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lafourchette/forkwars.svg)](https://travis-ci.org/lafourchette/forkwars)
+
 # Forkwars
 
 Forkwars is a turn by turn strategy game based on the Intelligence System success Advance Wars.
