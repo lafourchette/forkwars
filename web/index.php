@@ -50,16 +50,22 @@ if(php_sapi_name() === 'cli'){
         .map {
             border: 1px solid grey;
             background: lightgrey;
+            height: 258px;
+            width: 354px;
+        }
+        .table-hover td {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
     <h1>Game viewer</h1>
-    <h5>map</h5>
+    <h3>map</h3>
     <div class="map"></div>
-    <h5>actions list</h5>
-    <table class="table table-condensed"><tbody class="actionList"></tbody></table>
+    <h3>actions list</h3>
+    (click on a row to go to this game state)
+    <table class="table table-condensed table-hover"><tbody class="actionList"></tbody></table>
     </div>
 
     <!-- scripts -->

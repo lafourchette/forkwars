@@ -20,12 +20,13 @@ php composer.phar install --prefer-dist
 ```
 You can serve the `web/` folder and have a look at the .php file.
 ```bash
-cd web
-php -S localhost:8000
+php -S localhost:8000 -t web
 ```
 And then navigate to [http://localhost:8000](http://localhost:8000) in your favorite browser.
 
 ![game viewer screenshot](doc/screenshot.png)
+
+The viewer basically helps you see all the game steps.
 
 ## Testing
 Make sure you have phpunit installed somewhere in your PATH. Just run phpunit in the root folder.
