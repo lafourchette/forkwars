@@ -95,11 +95,6 @@ class Unit extends Thing
         return $success;
     }
 
-    public function canCapture()
-    {
-        // return $unit->getTeam() != $this->getTeam();
-    }
-
     /**
      * {@inheritdoc}
      *

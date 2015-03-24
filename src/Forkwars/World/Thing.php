@@ -84,25 +84,30 @@ class Thing
     /**
      * Add a child to $this and sets the child's parent.
      * @param Thing $child
+     * @return $this
      */
     public function addChild(Thing $child)
     {
         $this->getChildren()->attach($child);
         $child->setParent($this);
+        return $this;
     }
 
     /**
      * Remove the child and makes the child orphan.
      * @param Thing $child
+     * @return $this
      */
     public function removeChild(Thing $child)
     {
         $this->getChildren()->detach($child);
         $child->setParent(null);
+        return $this;
     }
 
     /**
      * @param Thing $parent
+     * @return $this
      */
     public function attachTo(Thing $parent)
     {
@@ -112,7 +117,7 @@ class Thing
     }
 
     /**
-     *
+     * @return $this
      */
     public function detach()
     {

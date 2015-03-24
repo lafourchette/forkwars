@@ -16,7 +16,7 @@ class Action
         $this->stringDescription = sprintf('%s %s %s',
             $who->getReference(),
             $what,
-            $mixed instanceof Thing ? $this->formatThing($mixed) : var_export($mixed, true)
+            $mixed instanceof Thing ? $this->formatThing($mixed)['reference'] : var_export($mixed, true)
         );
 
         $this->description = array(

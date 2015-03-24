@@ -6,6 +6,12 @@ use Forkwars\General\GeneralInterface;
 use Forkwars\World\Action;
 use Forkwars\World\Thing;
 
+/**
+ * Class Terrain
+ * @package Forkwars\World\Terrain
+ * @todo canHeal
+ * @todo log ?
+ */
 class Terrain extends Thing
 {
     public function __construct(array $metadata)
@@ -18,22 +24,12 @@ class Terrain extends Thing
         return $this->returnMandatoryMetadata('name');
     }
 
-    public function canHeal()
-    {
-        return $this->hasMetadataAndTrue('healing');
-    }
-
     private function returnMandatoryMetadata($name)
     {
         if(! isset($this->metadata[$name])){
             throw new \LogicException($name . ' shall be set');
         }
         return $this->metadata[$name];
-    }
-
-    private function hasMetadataAndTrue($name)
-    {
-        return isset($this->metadata[$name]) && $this->metadata[$name];
     }
 
     /**
@@ -44,11 +40,6 @@ class Terrain extends Thing
     public function registerAction(Action $action)
     {
         return $this->getParent()->registerAction($action);
-    }
-
-    public function log($message)
-    {
-        $this->registerAction(new Action($this, 'log', $message));
     }
 
     /**
