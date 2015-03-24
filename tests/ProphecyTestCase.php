@@ -91,13 +91,13 @@ abstract class ProphecyTestCase extends \PHPUnit_Framework_TestCase
         return unserialize($serialized);
     }
 
-    public function prophesize($className)
+    public function prophesize($classOrInterface = NULL)
     {
-        if (! class_exists($className) && ! interface_exists($className)) {
-            throw new \Exception("$className class/interface does not exists");
+        if (! class_exists($classOrInterface) && ! interface_exists($classOrInterface)) {
+            throw new \Exception("$classOrInterface class/interface does not exists");
         }
 
-        return $this->__prophet->prophesize($className);
+        return $this->__prophet->prophesize($classOrInterface);
     }
 
     /**
