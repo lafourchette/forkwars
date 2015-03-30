@@ -1,6 +1,6 @@
 {"frames": 
     {
-        "water":
+        "water0":
         {
             "frame": {"x":414,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -8,7 +8,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "land":
+        "land0":
         {
             "frame": {"x":440,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -16,7 +16,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "bridge":
+        "bridge0":
         {
             "frame": {"x":440,"y":307,"w":16,"h":16},
             "rotated": false,
@@ -24,7 +24,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "headquarter":
+        "headquarter1":
         {
             "frame": {"x":474,"y":82,"w":20,"h":31},
             "rotated": false,
@@ -32,7 +32,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":20,"h":31},
             "sourceSize": {"w":20,"h":31}
         },
-        "R.png":
+        "headquarter2":
         {
             "frame": {"x":339,"y":82,"w":20,"h":31},
             "rotated": false,
@@ -48,7 +48,7 @@
             "spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
             "sourceSize": {"w":16,"h":16}
         },
-        "factory":
+        "factory1":
         {
             "frame": {"x":388,"y":122,"w":16,"h":16},
             "rotated": false,
