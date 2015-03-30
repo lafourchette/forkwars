@@ -4,6 +4,7 @@ namespace Forkwars\World;
 
 use Forkwars\Exception\TerrainException;
 use Forkwars\General\GeneralInterface;
+use Forkwars\World\Terrain\Terrain;
 
 /**
  * Given a description file, makes a terrain given a code.

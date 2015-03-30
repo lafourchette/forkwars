@@ -28,7 +28,7 @@ class WorldFactory
         $teamCount = $lines[2]; // shall be integer
         $teams = array();
         for($i=0; $i <= $teamCount; $i++){
-            array_push($teams, new Team());
+            array_push($teams, new Team($i));
         }
         $this->terrainFactory->setAvailableTeams($teams);
 

@@ -212,7 +212,7 @@ class World extends Thing
         foreach($this->getChildren() as $t)
         {
             $buffer[] = array(
-                'code' => $t->getName(),
+                'code' => $t->getName() . $t->getTeam(),
                 'ref'  => 't:' . $t->getReference(),
                 'x' => $t->getPosition()->x,
                 'y' => $t->getPosition()->y
