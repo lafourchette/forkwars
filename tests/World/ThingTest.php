@@ -1,6 +1,7 @@
 <?php
 
 use Forkwars\World\Thing;
+use Forkwars\World\World;
 
 class ThingTest extends \ProphecyTestCase
 {
@@ -47,5 +48,39 @@ class ThingTest extends \ProphecyTestCase
 
         $this->assertNull($child->getParent());
         $this->assertNotContains($child, $parent->getChildren());
+    }
+
+    public function testGetRootWillGetTheThing()
+    {
+        $thing = new World('toto',1,1);
+        $this->assertSame($thing, $thing->getRoot());
+    }
+
+    public function testGetRootWillGetTheParentThing()
+    {
+        $parent  = new World('toto',1,1);
+        $terrain = new Forkwars\World\Terrain\Terrain(array());
+        $child   = new Thing();
+
+        $terrain->addChild($child);
+        $parent->addChild($terrain);
+
+        $this->assertSame($parent, $child->getRoot());
+    }
+
+
+    public function testGetRootWillGetTheGrantParentThing()
+    {
+        $child       = new Thing();
+        $parent      = new Thing();
+        $grantParent = new World('toto',1,1);
+        $terrain = new Forkwars\World\Terrain\Terrain(array());
+
+        $parent->addChild($child);
+        $terrain->addChild($parent);
+        $grantParent->addChild($terrain);
+
+        $this->assertNotSame($parent, $child->getRoot());
+        $this->assertSame($grantParent, $child->getRoot());
     }
 }

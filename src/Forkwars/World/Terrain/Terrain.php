@@ -14,6 +14,7 @@ use Forkwars\World\Thing;
  */
 class Terrain extends Thing
 {
+
     public function __construct(array $metadata)
     {
         $this->metadata = $metadata;
