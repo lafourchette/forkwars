@@ -68,13 +68,24 @@ class ThingTest extends \ProphecyTestCase
         $this->assertSame($parent, $child->getRoot());
     }
 
+    public function testGetRootWillThrowException()
+    {
+        $this->setExpectedException('\RuntimeException', 'The root thing should be a World.');
+
+        $child       = new Thing();
+        $parent      = new Thing();
+
+        $parent->addChild($child);
+        $child->getRoot();
+    }
+
 
     public function testGetRootWillGetTheGrantParentThing()
     {
         $child       = new Thing();
         $parent      = new Thing();
         $grantParent = new World('toto',1,1);
-        $terrain = new Forkwars\World\Terrain\Terrain(array());
+        $terrain     = new Forkwars\World\Terrain\Terrain(array());
 
         $parent->addChild($child);
         $terrain->addChild($parent);
