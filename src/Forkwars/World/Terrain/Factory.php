@@ -3,7 +3,9 @@
 namespace Forkwars\World\Terrain;
 
 use Forkwars\World\Action;
+use Forkwars\World\Unit\Metadata as UnitMetadata;
 use Forkwars\World\Unit\Unit;
+use Forkwars\World\TerrainFactory;
 
 class Factory extends Terrain
 {
@@ -11,13 +13,22 @@ class Factory extends Terrain
      * @param $something
      * @return Unit
      */
-    public function make($something)
+    public function make(UnitMetadata $metadata)
     {
-        $unit = new Unit(); // always infantry haha
-        $this->addChild($unit);
+        $unit = new Unit();
+
+        $this->setParent($metadata->getParent());
+        $this->registerReference($this->getRoot());
         $unit->setTeam($this->getTeam());
-        $this->registerReference($unit);
-        $this->registerAction(new Action($this, 'make', $unit));
+
+        if (null !== $metadata->getChild()) {
+            $this->addChild($metadata->getChild());
+        }
+
+        if (null !== $metadata->getAction()) {
+            $this->registerAction($metadata->getAction());
+        }
+
         return $unit;
     }
 }

@@ -3,7 +3,6 @@
 namespace Forkwars\World;
 
 use Forkwars\Position;
-use Symfony\Component\Yaml\Exception\RuntimeException;
 
 /**
  * A thing is part of a World, got a position on it, and which is sometimes part of a team.
@@ -171,7 +170,7 @@ class Thing
         $result = null;
         if (false === $this->isRoot()) {
             if ($this->getParent() === null) {
-                throw new RuntimeException('The root thing should be a World.');
+                throw new \RuntimeException('The root thing should be a World.');
             }
             $result = $this->getParent()->getRoot();
         } else {
