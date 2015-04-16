@@ -1,30 +1,25 @@
 [
     {
         "name": "land",
-        "code": "x",
-        "defense": 1
+        "code": "x"
     },
     {
         "name": "bridge",
-        "code": "b",
-        "defense": 1
+        "code": "b"
     },
     {
         "name": "water",
-        "code": "i",
-        "defense": 1
+        "code": "i"
     },
     {
         "name": "headquarter",
         "class": "CapturableTerrain",
         "redCode": "R",
-        "blueCode": "B",
-        "defense": 3
+        "blueCode": "B"
     },
     {
         "name": "factory",
         "redCode": "F",
-        "class": "Factory",
-        "defense": 3
+        "class": "Factory"
     }
 ]

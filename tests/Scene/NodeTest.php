@@ -1,22 +1,17 @@
 <?php
 
-use Forkwars\World\Thing;
+use Forkwars\Scene\Node;
 
-class ThingTest extends \ProphecyTestCase
+class NodeTest extends \ProphecyTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * Test parentship from a child viewpoint.
      * Attach and detach clean both sides of the relation.
      */
     public function testAttachToDetach()
     {
-        $child  = new Thing();
-        $parent = new Thing();
+        $child  = new Node();
+        $parent = new Node();
 
         $child->attachTo($parent);
 
@@ -35,8 +30,8 @@ class ThingTest extends \ProphecyTestCase
      */
     public function testAddChildRemoveChild()
     {
-        $child  = new Thing();
-        $parent = new Thing();
+        $child  = new Node();
+        $parent = new Node();
 
         $parent->addChild($child);
 

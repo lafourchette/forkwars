@@ -68,6 +68,8 @@ class TerrainFactory
         if(isset($this->codeMap[$code]['class'])){
             $className = 'Forkwars\\World\\Terrain\\' . $this->codeMap[$code]['class'];
             unset($this->codeMap[$code]['class']);
+
+            // @factory some classes receives special constructors, like factories
         }
 
         $terrain = new $className($this->codeMap[$code]);
