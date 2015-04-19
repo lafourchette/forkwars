@@ -1,6 +1,7 @@
 [
     {
         "name": "land",
+        "class": "Terrain",
         "code": "x"
     },
     {
@@ -21,5 +22,19 @@
         "name": "factory",
         "redCode": "F",
         "class": "Factory"
+    },
+    {
+        "name" : "infantry",
+        "footMove" : 3,
+        "trackMove": 0,
+        "wheelMove": 0,
+        "skyMove"  : 0,
+        "waterMove": 0,
+        "view" : 5,
+        "offensePower" : "20",
+        "defensePower" : "30",
+        "range": [1,1],
+        "sprite" : "infantry",
+        "code" : "inf"
     }
 ]
