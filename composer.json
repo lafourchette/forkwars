@@ -3,7 +3,8 @@
     "description": "game",
     "license": "None",
     "require": {
-        "symfony/finder": "*"
+        "symfony/finder": "*",
+        "pimple/pimple": "~3.0"
     },
     "require-dev": {
         "phpspec/prophecy": "~1.0"
