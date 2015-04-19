@@ -30,7 +30,7 @@ class Action
     private function formatThing(Thing $thing)
     {
         return array(
-                'reference' => 't:' . $thing->getReference(),
+                'reference' => 't:' . $thing->getReference()->name,
                 'x' => $thing->getPosition()->x,
                 'y' => $thing->getPosition()->y,
                 'code' => $thing->getName()

@@ -13,16 +13,29 @@ class Node
 
     private $parent = null;
 
+    /**
+     * @var Position
+     */
     private $position = null;
 
+    /**
+     * @var Reference
+     */
     private $reference = null;
 
-    public function setReference($reference)
+    /**
+     * @param Reference $reference
+     * @return $this
+     */
+    public function setReference(Reference $reference)
     {
         $this->reference = $reference;
         return $this;
     }
 
+    /**
+     * @return Reference
+     */
     public function getReference()
     {
         return $this->reference;
