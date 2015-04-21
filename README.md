@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/lafourchette/forkwars.svg)](https://travis-ci.org/lafourchette/forkwars)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lafourchette/forkwars/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lafourchette/forkwars/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/lafourchette/forkwars/badges/build.png?b=master)](https://scrutinizer-ci.com/g/lafourchette/forkwars/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/lafourchette/forkwars/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/lafourchette/forkwars/?branch=master)
 
 # Forkwars
 
