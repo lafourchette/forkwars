@@ -159,4 +159,33 @@ class Thing
     {
         throw new \Exception('Cannot register reference');
     }
+
+    /**
+     * get the root of the Scenegraph
+     *
+     * @return Thing
+     */
+    public function getRoot()
+    {
+        $result = null;
+        if (false === $this->isRoot()) {
+            if ($this->getParent() === null) {
+                throw new \RuntimeException('The root thing should be a World.');
+            }
+            $result = $this->getParent()->getRoot();
+        } else {
+            $result = $this;
+        }
+        return $result;
+    }
+
+    /**
+     * Check if this is the root of the Scenegraph
+     *
+     * @return bool
+     */
+    protected function isRoot()
+    {
+        return ($this->parent === null && $this instanceof World) ? true : false;
+    }
 }

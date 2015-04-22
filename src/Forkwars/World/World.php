@@ -231,4 +231,13 @@ class World extends Thing
         $thing->setReference($thing->getName() . '_' . ++$this->referenceCounter);
         array_push($this->referenceMap, $thing->getReference());
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

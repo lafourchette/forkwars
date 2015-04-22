@@ -13,6 +13,7 @@ class UnitTest extends \ProphecyTestCase
         $to   = $this->prophesize('Forkwars\World\Thing');
         $toR  = $to->reveal();
         $to->registerAction(\Prophecy\Argument::type('Forkwars\World\Action'))->shouldBeCalled();
+
         $to->getChildren()->willReturn(new \SplObjectStorage());
 
         // Test
