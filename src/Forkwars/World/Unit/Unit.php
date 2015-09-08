@@ -24,13 +24,6 @@ class Unit extends Thing
         $this->metadata = $metadata;
         $this->metadata['currentMovementLeft'] = $this->metadata['maxMovementByTurn'];
     }
-    private function returnMandatoryMetadata($name)
-    {
-        if(! isset($this->metadata[$name])){
-            throw new \LogicException($name . ' shall be set');
-        }
-        return $this->metadata[$name];
-    }
     public function getName()
     {
         return 'infantry';
@@ -52,7 +45,6 @@ class Unit extends Thing
     {
         return $this->getParent()->getPosition();
     }
-
     public function log($message)
     {
         $this->registerAction(new Action($this, 'log', $message));

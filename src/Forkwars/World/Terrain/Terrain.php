@@ -32,14 +32,6 @@ class Terrain extends Thing
         return $this->returnMandatoryMetadata('movementCost');
     }
 
-    private function returnMandatoryMetadata($name)
-    {
-        if(! isset($this->metadata[$name])){
-            throw new \LogicException($name . ' shall be set');
-        }
-        return $this->metadata[$name];
-    }
-
     /**
      * {@inheritdoc}
      *

@@ -182,7 +182,9 @@ class World extends Thing
         // Resets all Unit movement credits
         $unit_list = $this->find("infantry");
         foreach($unit_list as $unit) {
-          $unit->resetMovementLeft();
+          if($unit instanceof Unit) {
+            $unit->resetMovementLeft();
+          }
         }
     }
 
