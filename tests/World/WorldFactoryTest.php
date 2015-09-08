@@ -3,7 +3,7 @@
 use Forkwars\Position;
 use Forkwars\World\WorldFactory;
 
-class WorldFactoryTest extends \ProphecyTestCase
+class WorldFactoryTest extends \PHPUnit_Framework_TestCase
 {
     // Device Under Test
     private $dut;

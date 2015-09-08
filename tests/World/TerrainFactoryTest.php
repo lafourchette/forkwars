@@ -2,7 +2,7 @@
 
 use Forkwars\World\TerrainFactory;
 
-class TerrainFactoryTest extends \ProphecyTestCase
+class TerrainFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

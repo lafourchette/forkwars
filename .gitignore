@@ -4,3 +4,4 @@ vendor
 composer.phar
 game.cache
 coverage
+bin

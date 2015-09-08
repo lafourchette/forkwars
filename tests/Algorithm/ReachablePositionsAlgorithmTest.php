@@ -6,7 +6,7 @@ use Forkwars\World\Terrain\Land;
 use Forkwars\World\Unit\Unit;
 use Forkwars\World\World;
 
-class ReachablePositionsAlgorithmTest extends \ProphecyTestCase
+class ReachablePositionsAlgorithmTest extends \PHPUnit_Framework_TestCase
 {
     private $world;
 

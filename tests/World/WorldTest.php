@@ -1,6 +1,6 @@
 <?php
 
-class WorldTest extends \ProphecyTestCase
+class WorldTest extends \PHPUnit_Framework_TestCase
 {
     // Device Under Test
     private $dut;

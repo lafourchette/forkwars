@@ -2,7 +2,7 @@
 
 use Forkwars\World\Thing;
 
-class ThingTest extends \ProphecyTestCase
+class ThingTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
