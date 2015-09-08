@@ -12,6 +12,7 @@ class TerrainFactoryTest extends \PHPUnit_Framework_TestCase
     public function testMake()
     {
         $dut = new TerrainFactory(array(array('code' => 'a')));
+        $dut->setAvailableTeams(array(0 => new \Forkwars\World\Team(0), 1 => new \Forkwars\World\Team(1)));
         $this->assertInstanceOf('ForkWars\World\Terrain\Terrain', $dut->make('a'));
     }
 
@@ -28,8 +29,9 @@ class TerrainFactoryTest extends \PHPUnit_Framework_TestCase
     public function testMakeTeamTerrain()
     {
         $dut = new TerrainFactory(array(array('code' => 'a', 'redCode' => 'r')));
+        $dut->setAvailableTeams(array(0 => new \Forkwars\World\Team(0), 1 => new \Forkwars\World\Team(1)));
         $t = $dut->make('r');
         $this->assertInstanceOf('ForkWars\World\Terrain\Terrain', $t);
-        $this->assertSame(\Forkwars\General\GeneralInterface::RED, $t->getTeam());
+        $this->assertInstanceOf('Forkwars\World\Team', $t->getTeam());
     }
 }

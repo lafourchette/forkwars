@@ -36,7 +36,7 @@ class WorldTest extends \PHPUnit_Framework_TestCase
         $unit->moveTo($this->ter2);
 
         $turn = $this->dut->endTurn();
-        $this->assertInstanceOf('Forkwars\World\Game\Turn', $turn);
+        $this->assertInstanceOf('Forkwars\Game\Turn', $turn);
         $this->assertCount(1, $turn);
     }
 }

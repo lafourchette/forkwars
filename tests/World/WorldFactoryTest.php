@@ -17,11 +17,12 @@ class WorldFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testMake()
     {
-        $this->mockTerrainFactory->make('i')->willReturn(new \Forkwars\World\Terrain\Terrain(array()));
-
+        $this->mockTerrainFactory->make('i')->willReturn(new \Forkwars\World\Terrain\Terrain(array('name' => 'yay')));
+        $this->mockTerrainFactory->setAvailableTeams(\Prophecy\Argument::any())->willReturn(null);
         $map = <<<EOF
 yeah
 1x1
+1
 i
 EOF;
         $world = $this->dut->make($map);
