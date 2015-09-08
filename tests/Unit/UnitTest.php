@@ -1,4 +1,6 @@
 <?php
+use Forkwars\World\Terrain\Terrain;
+use Forkwars\Position;
 
 class UnitTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,5 +25,25 @@ class UnitTest extends \PHPUnit_Framework_TestCase
         $dut->moveTo($toR);
 
         $this->assertSame($toR, $dut->getParent());
+    }
+
+    /**
+     * Move a Unit across 4 lands. Shall rise an exception somewhere.
+     */
+    public function testMoveToTooFar()
+    {
+        $this->setExpectedException('Forkwars\World\Unit\UnitMovementException');
+
+        $from = new Terrain(array('movementCost' => 100)); $from->setPosition(new Position(0, 0));
+        $a   = new Terrain(array('movementCost' => 50));  $a->setPosition(new Position(0, 1));
+        $b   = new Terrain(array('movementCost' => 100));   $b->setPosition(new Position(0, 2)); // Rise exception here
+        $to   = new Terrain(array('movementCost' => 200));  $to->setPosition(new Position(0, 3));
+
+        // Test
+        $dut = new \Forkwars\World\Unit\Unit();
+        $dut->setParent($from);
+        $dut->moveTo($a);
+        $dut->moveTo($b);
+        $dut->moveTo($to);
     }
 }

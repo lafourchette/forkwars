@@ -24,6 +24,11 @@ class Unit extends Thing
         return 10;
     }
 
+    public function getMovementLeft()
+    {
+        return 200;
+    }
+
     public function getPosition()
     {
         return $this->getParent()->getPosition();
@@ -102,6 +107,10 @@ class Unit extends Thing
      */
     public function registerAction(Action $action)
     {
-        return $this->getParent()->registerAction($action);
+        $res = false;
+        if ($parent = $this->getParent()) {
+            $res = $parent->registerAction($action);
+        }
+        return $res;
     }
 }

@@ -152,7 +152,11 @@ class Thing
 
     public function registerAction(Action $action)
     {
-        throw new \Exception('Cannot register action');
+        $res = false;
+        if ($parent = $this->getParent()) {
+            $res = $parent->registerAction($action);
+        }
+        return $res;
     }
 
     public function registerReference(Thing $thing)

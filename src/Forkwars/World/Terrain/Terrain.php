@@ -14,7 +14,7 @@ use Forkwars\World\Thing;
  */
 class Terrain extends Thing
 {
-    public function __construct(array $metadata)
+    public function __construct(array $metadata = array())
     {
         $this->metadata = $metadata;
     }
@@ -22,6 +22,11 @@ class Terrain extends Thing
     public function getName()
     {
         return $this->returnMandatoryMetadata('name');
+    }
+
+    public function getMovementCost()
+    {
+        return $this->returnMandatoryMetadata('movementCost');
     }
 
     private function returnMandatoryMetadata($name)
@@ -39,7 +44,11 @@ class Terrain extends Thing
      */
     public function registerAction(Action $action)
     {
-        return $this->getParent()->registerAction($action);
+        $res = false;
+        if ($parent = $this->getParent()) {
+            $res = $parent->registerAction($action);
+        }
+        return $res;
     }
 
     /**
