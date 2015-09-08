@@ -6,6 +6,7 @@ use Forkwars\Position;
 use Forkwars\World\Action;
 use Forkwars\World\Terrain\Terrain;
 use Forkwars\World\Thing;
+use Forkwars\World\Unit\UnitMovementException;
 
 use Forkwars\World\Terrain\CapturableTerrain;
 
@@ -14,6 +15,22 @@ use Forkwars\World\Terrain\CapturableTerrain;
  */
 class Unit extends Thing
 {
+    public function __construct(array $metadata = array())
+    {
+        // Set 200 as the default unit movement credit if not set
+        if(!isset($metadata["maxMovementByTurn"])) {
+          $metadata['maxMovementByTurn'] = 200;
+        }
+        $this->metadata = $metadata;
+        $this->metadata['currentMovementLeft'] = $this->metadata['maxMovementByTurn'];
+    }
+    private function returnMandatoryMetadata($name)
+    {
+        if(! isset($this->metadata[$name])){
+            throw new \LogicException($name . ' shall be set');
+        }
+        return $this->metadata[$name];
+    }
     public function getName()
     {
         return 'infantry';
@@ -26,9 +43,11 @@ class Unit extends Thing
 
     public function getMovementLeft()
     {
-        return 200;
+        return $this->returnMandatoryMetadata("currentMovementLeft");
     }
-
+    public function resetMovementLeft() {
+      $this->metadata["currentMovementLeft"] = $this->metadata["maxMovementByTurn"];
+    }
     public function getPosition()
     {
         return $this->getParent()->getPosition();
@@ -37,6 +56,14 @@ class Unit extends Thing
     public function log($message)
     {
         $this->registerAction(new Action($this, 'log', $message));
+    }
+
+    public function canMove(Thing $destination) {
+      if($destination instanceof Terrain) {
+        return $destination->getMovementCost() <= $this->getMovementLeft();
+      }
+      // If not moving to a terrain, allow movement
+      return true;
     }
 
     /**
@@ -49,7 +76,14 @@ class Unit extends Thing
         $this->detach();
         $this->attachTo($destination);
 
-        // @todo canMove
+        // canMove
+        if($this->canMove($destination)) {
+          if($destination instanceof Terrain) {
+            $this->metadata["currentMovementLeft"] -= $destination->getMovementCost();
+          }
+        } else {
+          throw new UnitMovementException("Not enough movement points to move to this position");
+        }
         // @todo destination is Reachable ?
 
         $destination->registerAction(new Action(

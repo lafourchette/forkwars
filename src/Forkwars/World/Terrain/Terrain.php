@@ -16,6 +16,9 @@ class Terrain extends Thing
 {
     public function __construct(array $metadata = array())
     {
+        if(!isset($metadata["movementCost"])) {
+          $metadata["movementCost"] = 100;
+        }
         $this->metadata = $metadata;
     }
 

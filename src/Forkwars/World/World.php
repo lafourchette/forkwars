@@ -179,6 +179,11 @@ class World extends Thing
             throw new GameException('Please first finish the current turn');
         }
         $this->currentTurn = new Turn();
+        // Resets all Unit movement credits
+        $unit_list = $this->find("infantry");
+        foreach($unit_list as $unit) {
+          $unit->resetMovementLeft();
+        }
     }
 
     public function endTurn()
