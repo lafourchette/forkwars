@@ -28,7 +28,8 @@ class TerrainFactory
                 'blueCode'  => Team::TEAM_BLUE,
                 'redCode'   => Team::TEAM_RED
             );
-            array_walk(array_keys($codes), function($c) use (&$metadata) {
+            $codeKeys = array_keys($codes);
+            array_walk($codeKeys, function($c) use (&$metadata) {
                 unset($metadata[$c]); // remove metadata code references
             });
             // Map each code to a possible team
