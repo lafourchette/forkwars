@@ -163,4 +163,12 @@ class Thing
     {
         throw new \Exception('Cannot register reference');
     }
+
+    protected function returnMandatoryMetadata($name)
+    {
+        if(! isset($this->metadata[$name])){
+            throw new \LogicException($name . ' shall be set');
+        }
+        return $this->metadata[$name];
+    }
 }

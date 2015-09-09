@@ -16,6 +16,9 @@ class Terrain extends Thing
 {
     public function __construct(array $metadata = array())
     {
+        if(!isset($metadata["movementCost"])) {
+          $metadata["movementCost"] = 100;
+        }
         $this->metadata = $metadata;
     }
 
@@ -27,14 +30,6 @@ class Terrain extends Thing
     public function getMovementCost()
     {
         return $this->returnMandatoryMetadata('movementCost');
-    }
-
-    private function returnMandatoryMetadata($name)
-    {
-        if(! isset($this->metadata[$name])){
-            throw new \LogicException($name . ' shall be set');
-        }
-        return $this->metadata[$name];
     }
 
     /**

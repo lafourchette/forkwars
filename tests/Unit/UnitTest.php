@@ -40,7 +40,7 @@ class UnitTest extends \PHPUnit_Framework_TestCase
         $to   = new Terrain(array('movementCost' => 200));  $to->setPosition(new Position(0, 3));
 
         // Test
-        $dut = new \Forkwars\World\Unit\Unit();
+        $dut = new \Forkwars\World\Unit\Unit(array("maxMovementByTurn" => 200));
         $dut->setParent($from);
         $dut->moveTo($a);
         $dut->moveTo($b);
