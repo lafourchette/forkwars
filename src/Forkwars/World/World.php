@@ -137,8 +137,8 @@ class World extends Thing
         $world = $this;
 
         return array_filter(array($n, $s, $w, $e), function (Position $p) use ($world) {
-            return ! ( $p->y < 0 || $world->height < $p->y ||
-                $p->x < 0 || $world->width < $p->x );
+            return ! ( $p->y < 0 || $world->height <= $p->y ||
+                $p->x < 0 || $world->width <= $p->x );
         });
     }
 
