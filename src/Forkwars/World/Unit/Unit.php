@@ -78,6 +78,8 @@ class Unit extends Thing
         }
         // @todo destination is Reachable ?
 
+        $this->canMove($past, $destination);
+
         $destination->registerAction(new Action(
             $past,
             'moveTo',
@@ -89,6 +91,13 @@ class Unit extends Thing
 
         if($this->getParent() instanceof CapturableTerrain){
             $this->getParent()->resetCapture();
+        }
+    }
+
+    public function canMove(Thing $origin, Thing $destination)
+    {
+        if (!$origin->getPosition() instanceof Position || !$destination->getPosition() instanceof Position) {
+            throw new \Exception('Can not move from position origin to position destination.');
         }
     }
 
